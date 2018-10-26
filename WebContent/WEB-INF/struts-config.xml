@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean type="actionform.AddContactActionForm" name="AddContactActionForm" />
+		<form-bean type="actionform.EditContactActionForm" name="EditContactActionForm" />
+		<form-bean type="actionform.ConnectionActionForm" name="ConnectionActionForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/ContactCreation" type="servletaction.InfoContactForm" name="InfoContactForm" forward="/pages/AddContact.jsp" >
+			<forward name="addContact" path="/pages/AddContact.jsp" />
+			<forward name="connection" path="/Connection.do" redirect="true" />
+		</action>
+		<action path="/Home" forward="/pages/main.jsp" type="servletaction.ListContactAction" name="ListContactAction" scope="request" >
+			<forward name="listContacts" path="/pages/main.jsp" />
+			<forward name="connection" path="/Connection.do" redirect="true" />
+		</action>
+		
+		<action path="/ContactSuppression" forward="/pages/main.jsp" type="servletaction.RemoveContactAction" name="RemoveContactAction" scope="request" >
+			<forward name="end" path="/Home.do" redirect="true" />
+			<forward name="connection" path="/Connection.do" redirect="true" />
+		</action>
+		
+		<action path="/ContactEdition" type="servletaction.InfoContactEditionForm" name="InfoContactEditionForm" forward="/pages/EditContact.jsp" >
+			<forward name="editContact" path="/pages/EditContact.jsp" />
+			<forward name="connection" path="/Connection.do" redirect="true" />
+		</action>
+		
+		<action path="/Connection" type="servletaction.CheckConnected" name="CheckConnected" forward="/pages/connection.jsp" >
+			<forward name="connection" path="/pages/connection.jsp" />
+			<forward name="connected" path="/Home.do" redirect="true" />
+		</action>
+		
+		<action path="/Logout" type="servletaction.LogoutAction" name="LogoutAction" forward="/pages/index.jsp" >
+			<forward name="logout" path="/" redirect="true"/>
+		</action>
+		
+		<action path="/Connect" type="servletaction.ConnectAction" name="ConnectionActionForm" scope="request"
+		input="/pages/connection.jsp">
+		<forward name="success" path="/Home.do" redirect="true" />
+		<forward name="error" path="/pages/connection.jsp" />
+		</action>
+		
+		<action path="/AddContact" type="servletaction.AddContactAction" name="AddContactActionForm" scope="request"
+		input="/pages/AddContact.jsp">
+		<forward name="success" path="/Home.do" redirect="true" />
+		<forward name="error" path="/pages/AddContact.jsp" />
+		<forward name="connection" path="/Connection.do" redirect="true" />
+		</action>
+		
+		<action path="/EditContact" type="servletaction.EditContactAction" name="EditContactActionForm" scope="request"
+		input="/pages/EditContact.jsp">
+		<forward name="success" path="/Home.do" redirect="true" />
+		<forward name="error" path="/pages/EditContact.jsp" />
+		<forward name="connection" path="/Connection.do" redirect="true" />
+		</action>
+
+	</action-mappings>
+	
+  	<message-resources parameter="languages/Resources" />
+
+</struts-config>
