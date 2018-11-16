@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.AddContactActionForm;
-import domain.Adress;
+import domain.Address;
 import domain.AdressDAO;
 import domain.Contact;
 import domain.ContactDAO;
@@ -36,7 +36,7 @@ public class RemoveContactAction extends Action
 		catch (Exception e) {}
 		String lError;
 		
-		final ContactDAO lContactDAO = new ContactDAO();
+		/* final ContactDAO lContactDAO = new ContactDAO();
 		final Contact contact = lContactDAO.getContact(id);
 		final PhoneNumber phoneNumber = new PhoneNumber(contact.phoneNumber.id);
 		final Adress adress = new Adress(contact.adress.id);
@@ -53,7 +53,7 @@ public class RemoveContactAction extends Action
 		{
 			pRequest.setAttribute("error", "Error");
 		}
-		System.out.println("LOL");
+		System.out.println("LOL"); */
 		return pMapping.findForward("end");
 	}
 }

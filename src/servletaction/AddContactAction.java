@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.AddContactActionForm;
-import domain.Adress;
+import domain.Address;
 import domain.AdressDAO;
 import domain.Contact;
 import domain.ContactDAO;
@@ -46,7 +46,7 @@ public class AddContactAction extends Action
 		final String phoneNumber = lForm.getPhoneNumber();
 		PhoneNumber phone = new PhoneNumber(phoneKind, phoneNumber);
 		
-		PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
+		/* PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
 		String sIdPhoneNumber = phoneNumberDAO.addPhoneNumber(phone);
 		int idPhoneNumber = -1;
 		try
@@ -55,15 +55,16 @@ public class AddContactAction extends Action
 		}
 		catch(Exception e) {}
 		phone.setId(idPhoneNumber);
+		*/
 		
 		/* Adress */
 		final String country = lForm.getCountry();
 		final String city = lForm.getCity();
 		final String zip = lForm.getZip();
 		final String street = lForm.getStreet();
-		Adress adress = new Adress(street, city, zip, country);
+		Address adress = new Address(street, city, zip, country);
 		
-		AdressDAO adressDAO = new AdressDAO();
+		/* AdressDAO adressDAO = new AdressDAO();
 		String sIdAdress = adressDAO.addAdress(adress);
 		int idAdress = -1;
 		try
@@ -72,6 +73,7 @@ public class AddContactAction extends Action
 		}
 		catch(Exception e) {}
 		adress.setId(idAdress);
+		*/
 		
 		/* Entreprise */
 		final String lentreprise = lForm.getEntreprise();
@@ -103,8 +105,8 @@ public class AddContactAction extends Action
 		}
 		
 		Contact contact = new Contact(firstName, lastName, email, adress, phone, entreprise, listContactGroup);
-		
-		final ContactDAO lContactDAO = new ContactDAO();
+		return pMapping.findForward("success");
+		/* final ContactDAO lContactDAO = new ContactDAO();
 		final String idContact = lContactDAO.addContact(contact);
 		try
 		{
@@ -130,6 +132,6 @@ public class AddContactAction extends Action
 			List<Group> listGroups = lGroupDAO.getAllGroups();
 			pRequest.setAttribute("listGroups", listGroups);
 			return pMapping.findForward("error");
-		}
+		} */
 	}
 }

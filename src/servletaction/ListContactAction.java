@@ -24,10 +24,10 @@ public class ListContactAction extends Action
             return pMapping.findForward("connection");
         }
 		
-		final ContactDAO lContactDAO = new ContactDAO();
+		/* final ContactDAO lContactDAO = new ContactDAO();
 		List<Contact> contacts = lContactDAO.getAllContacts();
 		
-		pRequest.setAttribute("contacts", contacts);
+		pRequest.setAttribute("contacts", contacts); */
 		
 		return pMapping.findForward("listContacts");
 	}

@@ -28,7 +28,7 @@ public class InfoContactEditionForm extends Action
             return pMapping.findForward("connection");
         }
         
-		final EntrepriseDAO lEntrepriseDAO = new EntrepriseDAO();
+		/* final EntrepriseDAO lEntrepriseDAO = new EntrepriseDAO();
 		List<Entreprise> entreprises = lEntrepriseDAO.getAllEntreprises();
 		pRequest.setAttribute("entreprises", entreprises);
 		
@@ -46,7 +46,7 @@ public class InfoContactEditionForm extends Action
 			System.out.println(contact);
 			pRequest.setAttribute("contact", contact);
 		}
-		catch(Exception e) {}
+		catch(Exception e) {} */
 		
 		return pMapping.findForward("editContact");
 	}

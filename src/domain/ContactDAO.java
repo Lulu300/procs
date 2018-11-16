@@ -18,7 +18,7 @@ public class ContactDAO extends DAO
         super();
     }
     
-    public List<Contact> getAllContacts()
+    /* public List<Contact> getAllContacts()
     {
     	List<Contact> contacts = new ArrayList<Contact>();
     	String query = "SELECT * FROM contact;";
@@ -43,7 +43,7 @@ public class ContactDAO extends DAO
 				
 				int idAdress = crs.getInt("idAdress");
 				AdressDAO adressDAO = new AdressDAO();
-				Adress adress = adressDAO.getAdress(idAdress);
+				Address adress = adressDAO.getAdress(idAdress);
 				
 				int idPhoneNumber = crs.getInt("idPhoneNumber");
 				PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
@@ -172,7 +172,7 @@ public class ContactDAO extends DAO
 				
 				int idAdress = crs.getInt("idAdress");
 				AdressDAO adressDAO = new AdressDAO();
-				Adress adress = adressDAO.getAdress(idAdress);
+				Address adress = adressDAO.getAdress(idAdress);
 				
 				int idPhoneNumber = crs.getInt("idPhoneNumber");
 				PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
@@ -187,6 +187,6 @@ public class ContactDAO extends DAO
 			e.printStackTrace();
 		}
     	return contact;
-	}
+	} */
 
 }

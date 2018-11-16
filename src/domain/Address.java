@@ -1,6 +1,6 @@
 package domain;
 
-public class Adress {
+public class Address {
 
 	public int id;
 	public String street;
@@ -8,7 +8,7 @@ public class Adress {
 	public String zip;
 	public String country;
 	
-	public Adress(int id)
+	public Address(int id)
 	{
 		this.id = id;
 		this.street = "NULL";
@@ -17,7 +17,7 @@ public class Adress {
 		this.country = "NULL";
 	}
 	
-	public Adress(int id, String street, String city, String zip, String country)
+	public Address(int id, String street, String city, String zip, String country)
 	{
 		this.id = id;
 		this.street = street;
@@ -26,7 +26,7 @@ public class Adress {
 		this.country = country;
 	}
 	
-	public Adress(String street, String city, String zip, String country)
+	public Address(String street, String city, String zip, String country)
 	{
 		this.id = -1;
 		this.street = street;

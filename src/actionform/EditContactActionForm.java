@@ -225,7 +225,7 @@ public class EditContactActionForm extends ActionForm
 		{
 			System.out.println(this.entreprise);
 			PhoneNumber phone = new PhoneNumber(Integer.parseInt(this.idPhone), this.phoneKind, this.phoneNumber);
-			Adress adress = new Adress(Integer.parseInt(this.idAdress), this.street, this.city, this.zip, this.country);
+			Address adress = new Address(Integer.parseInt(this.idAdress), this.street, this.city, this.zip, this.country);
 			Entreprise oEntreprise;
 			try
 			{

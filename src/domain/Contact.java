@@ -2,21 +2,18 @@ package domain;
 
 import java.util.List;
 
-public class Contact {
+public class Contact extends Entreprise {
 
-	public int id;
 	public String lastName;
 	public String firstName;
 	public String email;
-	public Adress adress;
+	public Address adress;
 	public PhoneNumber phoneNumber;
 	public Entreprise entreprise;
 	public List<Group> groups;
 
-	public Contact(int id, String lastName, String firstName, String email, Adress adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) 
-	{
-		super();
-		this.id = id;
+	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) {
+		super(id, numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
@@ -26,9 +23,8 @@ public class Contact {
 		this.groups = groups;
 	}
 	
-	public Contact(String lastName, String firstName, String email, Adress adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) 
-	{
-		super();
+	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) {
+		super(numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
@@ -38,7 +34,7 @@ public class Contact {
 		this.groups = groups;
 	}
 	
-	public Contact(String lastName, String firstName, String email) {
+	/* public Contact(String lastName, String firstName, String email) {
 		super();
 		this.id = -1;
 		this.lastName = lastName;
@@ -54,14 +50,13 @@ public class Contact {
 		this.email = "";
 	}
 	
-	public Contact(int id, String lastName, String firstName, String email) 
-	{
+	public Contact(int id, String lastName, String firstName, String email) {
 		super();
 		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-	}
+	} */
 	
 	public List<Group> getGroups() {
 		return groups;
@@ -71,11 +66,11 @@ public class Contact {
 		this.groups = groups;
 	}
 	
-	public Adress getAdress() {
+	public Address getAdress() {
 		return adress;
 	}
 
-	public void setAdress(Adress adress) {
+	public void setAdress(Address adress) {
 		this.adress = adress;
 	}
 	

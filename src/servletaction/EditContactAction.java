@@ -13,11 +13,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.EditContactActionForm;
-import domain.Adress;
+import domain.Address;
 import domain.AdressDAO;
 import domain.Contact;
 import domain.ContactDAO;
-import domain.ContactGroupDAO;
 import domain.Entreprise;
 import domain.EntrepriseDAO;
 import domain.Group;
@@ -53,7 +52,7 @@ public class EditContactAction extends Action
 		final String zip = lForm.getZip();
 		final String street = lForm.getStreet();
 		final int idAdress = Integer.parseInt(lForm.getIdAdress());
-		Adress adress = new Adress(idAdress, street, city, zip, country);
+		Address adress = new Address(idAdress, street, city, zip, country);
 		
 		/* Entreprise */
 		int idEntreprise = -1;
@@ -82,7 +81,8 @@ public class EditContactAction extends Action
 		}
 		
 		Contact contact = new Contact(id, firstName, lastName, email, adress, phone, entreprise, listContactGroup);
-		try
+		return pMapping.findForward("success");
+		/* try
 		{
 			String lError;
 			final ContactDAO lContactDAO = new ContactDAO();
@@ -112,6 +112,6 @@ public class EditContactAction extends Action
 			pRequest.setAttribute("listGroups", listGroups);
 			pRequest.setAttribute("contact", contact);
 			return pMapping.findForward("error");
-		}
+		} */
 	}
 }
