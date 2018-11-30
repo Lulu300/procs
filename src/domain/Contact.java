@@ -8,30 +8,30 @@ public class Contact extends Entreprise {
 	public String lastName;
 	public String firstName;
 	public String email;
-	public Address adress;
+	public Address address;
 	public Set<PhoneNumber> phoneNumbers;
 	public Set<Group> groups;
 
-	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
+	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		super(id, numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.adress = adress;
+		this.address = address;
 		this.phoneNumbers = phoneNumbers;
 		this.groups = groups;
 	}
 	
-	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address adress, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
+	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		super(numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
-		this.adress = adress;
+		this.address = address;
 		this.phoneNumbers = phoneNumbers;
 		this.groups = groups;
 	}
-	
+
 	public Set<Group> getGroups() {
 		return groups;
 	}
@@ -40,12 +40,12 @@ public class Contact extends Entreprise {
 		this.groups = groups;
 	}
 	
-	public Address getAdress() {
-		return adress;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAdress(Address adress) {
-		this.adress = adress;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 	public Set<PhoneNumber> getPhoneNumbers() {

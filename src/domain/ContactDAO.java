@@ -47,9 +47,11 @@ public class ContactDAO extends DAO
 		List<Contact> contacts = new ArrayList<Contact>();
 		StringBuffer request = new StringBuffer();
 		request.append("SELECT contact FROM Contact contact");
+		super.beginTransaction();
 		for (final Object o : super.getSession().createCriteria(Contact.class).list()) {
 			contacts.add((Contact) o);
 		}
+		super.endTransaction();
 		return contacts;
 	}
 

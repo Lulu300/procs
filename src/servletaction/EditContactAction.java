@@ -80,7 +80,7 @@ public class EditContactAction extends Action {
 		contact.setEmail(email);
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);
-		contact.setAdress(address);
+		contact.setAddress(address);
 		contact.setGroups(listContactGroup);
 		
 		String res = contactService.saveOrUpdate(contact);

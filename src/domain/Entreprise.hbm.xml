@@ -33,7 +33,7 @@
 			</property>
 			
 			<many-to-one name="address" class="Address" cascade="save-update"/>
-			<set name="phoneNumber" table="contact_phone" cascade="delete-all-orphan">
+			<set name="phoneNumbers" table="contact_phone" cascade="delete-orphan">
 				<key column="contact_phone" />
 				<one-to-many class="PhoneNumber" />
 			</set>
