@@ -9,7 +9,6 @@ public class Contact extends Entreprise {
 	public String email;
 	public Address adress;
 	public PhoneNumber phoneNumber;
-	public Entreprise entreprise;
 	public List<Group> groups;
 
 	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) {
@@ -19,7 +18,6 @@ public class Contact extends Entreprise {
 		this.email = email;
 		this.adress = adress;
 		this.phoneNumber = phoneNumber;
-		this.entreprise = entreprise;
 		this.groups = groups;
 	}
 	
@@ -30,33 +28,8 @@ public class Contact extends Entreprise {
 		this.email = email;
 		this.adress = adress;
 		this.phoneNumber = phoneNumber;
-		this.entreprise = entreprise;
 		this.groups = groups;
 	}
-	
-	/* public Contact(String lastName, String firstName, String email) {
-		super();
-		this.id = -1;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-	}
-	
-	public Contact(int id) {
-		super();
-		this.id = id;
-		this.lastName = "";
-		this.firstName = "";
-		this.email = "";
-	}
-	
-	public Contact(int id, String lastName, String firstName, String email) {
-		super();
-		this.id = id;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-	} */
 	
 	public List<Group> getGroups() {
 		return groups;
@@ -80,14 +53,6 @@ public class Contact extends Entreprise {
 
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public Entreprise getEntreprise() {
-		return entreprise;
-	}
-
-	public void setEntreprise(Entreprise entreprise) {
-		this.entreprise = entreprise;
 	}
 
 	public int getId() {

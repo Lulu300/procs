@@ -19,7 +19,7 @@ public class EntrepriseDAO extends DAO {
 		super.beginTransaction();
 		try {
 			super.getSession().saveOrUpdate(entreprise);
-			res = "Successfully saving/updating address";
+			res = "Successfully saving/updating entreprise";
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -48,7 +48,7 @@ public class EntrepriseDAO extends DAO {
 	public List<Entreprise> getAllEntreprises() {
 		List<Entreprise> entreprises = new ArrayList<Entreprise>();
 		StringBuffer request = new StringBuffer();
-		request.append("SELECT group FROM Group group");
+		request.append("SELECT entreprise FROM Entreprise entreprise");
 		for (final Object o : super.getSession().createCriteria(Entreprise.class).list()) {
 			entreprises.add((Entreprise) o);
 		}
