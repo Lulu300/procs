@@ -3,9 +3,9 @@ package domain;
 import domain.DAO;
 import domain.Address;
 
-public class AdressDAO extends DAO {
+public class AddressDAO extends DAO {
 	
-	public AdressDAO() {
+	public AddressDAO() {
 		super();
 	}
 	

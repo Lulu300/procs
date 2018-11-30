@@ -32,13 +32,13 @@
 				<column name="EMAIL" />
 			</property>
 			
-			<many-to-one name="adress" class="Adress" />
-			<set name="phoneNumber" table="contact_phone">
+			<many-to-one name="address" class="Address" cascade="save-update"/>
+			<set name="phoneNumber" table="contact_phone" cascade="delete-all-orphan">
 				<key column="contact_phone" />
 				<one-to-many class="PhoneNumber" />
 			</set>
 			
-			<list name="groups" cascade="all">
+			<list name="groups" cascade="save-update">
 				<key column="contactID"/>
 				<list-index column="idx"/>
 				<one-to-many class="Group"/>

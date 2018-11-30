@@ -13,21 +13,20 @@ import org.apache.struts.action.ActionMapping;
 
 import domain.Contact;
 import domain.ContactDAO;
+import service.ContactService;
 
-public class ListContactAction extends Action 
-{
-	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
-	{
+public class ListContactAction extends Action {
+	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }
+        
+        final ContactService contactService = new ContactService();
+        List<Contact> contacts = contactService.getAllContacts();
 		
-		/* final ContactDAO lContactDAO = new ContactDAO();
-		List<Contact> contacts = lContactDAO.getAllContacts();
-		
-		pRequest.setAttribute("contacts", contacts); */
+		pRequest.setAttribute("contacts", contacts);
 		
 		return pMapping.findForward("listContacts");
 	}

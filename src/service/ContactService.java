@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+
+import domain.Contact;
 import domain.ContactDAO;
 
 public class ContactService {
@@ -10,8 +13,20 @@ public class ContactService {
 		this.contactDAO = new ContactDAO();
 	}
 	
-	public String saveOrUpdate() {
-		return "TODO";
+	public String saveOrUpdate(Contact contact) {
+		return this.contactDAO.saveOrUpdateContact(contact);
+	}
+	
+	public List<Contact> getAllContacts() {
+		return this.contactDAO.getAllContacts();
+	}
+	
+	public Contact getContact(int id) {
+		return this.contactDAO.getContact(id);
+	}
+	
+	public String removeContact(Contact contact) {
+		return this.removeContact(contact);
 	}
 	
 }

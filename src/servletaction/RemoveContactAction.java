@@ -11,10 +11,9 @@ import org.apache.struts.action.ActionMapping;
 
 import actionform.AddContactActionForm;
 import domain.Address;
-import domain.AdressDAO;
+import domain.AddressDAO;
 import domain.Contact;
 import domain.ContactDAO;
-import domain.ContactGroupDAO;
 import domain.PhoneNumber;
 import domain.PhoneNumberDAO;
 
