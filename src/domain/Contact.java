@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class Contact extends Entreprise {
 
@@ -8,34 +9,34 @@ public class Contact extends Entreprise {
 	public String firstName;
 	public String email;
 	public Address adress;
-	public PhoneNumber phoneNumber;
-	public List<Group> groups;
+	public Set<PhoneNumber> phoneNumbers;
+	public Set<Group> groups;
 
-	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, List<Group> groups) {
+	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		super(id, numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
 		this.adress = adress;
-		this.phoneNumber = phoneNumber;
+		this.phoneNumbers = phoneNumbers;
 		this.groups = groups;
 	}
 	
-	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, List<Group> groups) {
+	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address adress, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		super(numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
 		this.adress = adress;
-		this.phoneNumber = phoneNumber;
+		this.phoneNumbers = phoneNumbers;
 		this.groups = groups;
 	}
 	
-	public List<Group> getGroups() {
+	public Set<Group> getGroups() {
 		return groups;
 	}
 
-	public void setGroups(List<Group> groups) {
+	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
 	
@@ -47,12 +48,20 @@ public class Contact extends Entreprise {
 		this.adress = adress;
 	}
 	
-	public PhoneNumber getPhoneNumber() {
-		return phoneNumber;
+	public Set<PhoneNumber> getPhoneNumbers() {
+		return phoneNumbers;
 	}
 
-	public void setPhoneNumber(PhoneNumber phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
+	}
+	
+	public boolean addPhoneNumber(PhoneNumber phoneNumber) {
+		return this.phoneNumbers.add(phoneNumber);
+	}
+	
+	public boolean removePhoneNumber(PhoneNumber phoneNumber) {
+		return this.phoneNumbers.remove(phoneNumber);
 	}
 
 	public int getId() {

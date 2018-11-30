@@ -32,7 +32,10 @@
 			</property>
 			
 			<many-to-one name="adress" class="Adress" />
-			<one-to-one name="phoneNumber" class="PhoneNumber" />
+			<set name="phoneNumber" table="contact_phone">
+				<key column="contact_phone" />
+				<one-to-many class="PhoneNumber" />
+			</set>
 			
 			<list name="groups" cascade="all">
 				<key column="contactID"/>
