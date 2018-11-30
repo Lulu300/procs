@@ -9,7 +9,7 @@
 			<generator class="increment"/>
 		</id>
 		
-		<property name="numsiret" type="string">
+		<property name="numsiret" type="string" unique="true">
 			<column name="NUMSIRET" />
 		</property>
 		
@@ -27,7 +27,7 @@
 				<column name="LASTNAME" />
 			</property>
 			
-			<property name="email" type="string">
+			<property name="email" type="string" unique="true">
 				<column name="EMAIL" />
 			</property>
 			

@@ -17,18 +17,17 @@ public class EditContactActionForm extends ActionForm
 	 */
 	private static final long serialVersionUID = 1L;
 	/* Contact */
-	private String id = null;
 	private String lastName = null;
 	private String firstName = null;
 	private String email = null;
 	
+	/* Company */
+	private String numSiret = null;
+	private String companyName = null;
+	
 	/* PhoneNumber */
 	private String phoneKind = null;
 	private String phoneNumber = null;
-	
-	/* Entreprise */
-	private String entreprise = null;
-	private List entreprises; 
 	
 	/* Adress */
 	private String street = null;
@@ -42,12 +41,11 @@ public class EditContactActionForm extends ActionForm
 	
 	private String idPhone = null;
 	private String idAdress = null;
+	private String idCompany = null;
 
 	public EditContactActionForm() 
 	{
 		super();
-		EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
-		this.entreprises = entrepriseDAO.getAllEntreprises();
 		
 		GroupDAO lGroupDAO = new GroupDAO();
 		this.listGroups = lGroupDAO.getAllGroups();
@@ -69,12 +67,12 @@ public class EditContactActionForm extends ActionForm
 		this.idPhone = idPhone;
 	}
 	
-	public String getId() {
-		return id;
+	public String getIdCompany() {
+		return idPhone;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdCompany(String idCompany) {
+		this.idCompany = idCompany;
 	}
 	
 	public String[] getGroups() {
@@ -101,19 +99,22 @@ public class EditContactActionForm extends ActionForm
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getEntreprise() {
-		return entreprise;
+	public String getNumSiret() {
+		return numSiret;
+	}
+
+	public void setNumSiret(String numSiret) {
+		this.numSiret = numSiret;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	
-	public void setEntreprise(String entreprise) 
-	{
-		this.entreprise = entreprise;
-	}
-
-	public void setName(String entreprise) {
-		this.entreprise = entreprise;
-	}
-
 	public String getStreet() {
 		return street;
 	}
@@ -193,6 +194,16 @@ public class EditContactActionForm extends ActionForm
 			errors.add("email", new ActionMessage("form.contact.email.error"));
 		}
 		
+		/* Company */
+		if (this.numSiret == null || this.numSiret.length() != 14)
+		{
+			errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
+		}
+		if (this.companyName == null || this.companyName.length() < 1 || this.companyName.length() > 45)
+		{
+			errors.add("companyName", new ActionMessage("form.contact.companyName.error.size"));
+		}
+		
 		/* PhoneNumber */
 		if ((this.phoneKind != "" && this.phoneKind.length() < 3) || this.phoneKind.length() > 10)
 		{
@@ -223,26 +234,15 @@ public class EditContactActionForm extends ActionForm
 		
 		if(!errors.isEmpty()) 
 		{
-			System.out.println(this.entreprise);
 			PhoneNumber phone = new PhoneNumber(Integer.parseInt(this.idPhone), this.phoneKind, this.phoneNumber);
 			Address adress = new Address(Integer.parseInt(this.idAdress), this.street, this.city, this.zip, this.country);
-			Entreprise oEntreprise;
-			try
-			{
-				oEntreprise = new Entreprise(Integer.parseInt(this.entreprise));
-			}
-			catch (Exception e)
-			{
-				oEntreprise = new Entreprise(-1);
-			}
 			List<Group> contactGroup = new ArrayList<Group>();
 			for (String idGroup : this.groups)
 			{
 				contactGroup.add(new Group(Integer.parseInt(idGroup)));
 			}
-			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adress, phone, oEntreprise, contactGroup);
+			Contact contact = new Contact(Integer.parseInt(this.idCompany), this.numSiret, this.companyName, this.lastName, this.firstName, this.email, adress, phone, contactGroup);
 			request.setAttribute("contact", contact);
-			request.setAttribute("entreprises", this.entreprises);
             request.setAttribute("listGroups", this.listGroups);
         }
 		return errors;

@@ -11,7 +11,7 @@ public class Contact extends Entreprise {
 	public PhoneNumber phoneNumber;
 	public List<Group> groups;
 
-	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) {
+	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, List<Group> groups) {
 		super(id, numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -21,7 +21,7 @@ public class Contact extends Entreprise {
 		this.groups = groups;
 	}
 	
-	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, Entreprise entreprise, List<Group> groups) {
+	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address adress, PhoneNumber phoneNumber, List<Group> groups) {
 		super(numsiret, name);
 		this.lastName = lastName;
 		this.firstName = firstName;
