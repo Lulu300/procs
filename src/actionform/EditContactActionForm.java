@@ -7,8 +7,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public class EditContactActionForm extends ActionForm
 {
@@ -24,10 +25,6 @@ public class EditContactActionForm extends ActionForm
 	/* Company */
 	private String numSiret = null;
 	private String companyName = null;
-	
-	/* PhoneNumber */
-	private String phoneKind = null;
-	private String phoneNumber = null;
 	
 	/* Adress */
 	private String street = null;
@@ -81,22 +78,6 @@ public class EditContactActionForm extends ActionForm
 
 	public void setGroups(String[] groups) {
 		this.groups = groups;
-	}
-
-	public String getPhoneKind() {
-		return phoneKind;
-	}
-	
-	public void setPhoneKind(String phoneKind) {
-		this.phoneKind = phoneKind;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getNumSiret() {
@@ -204,16 +185,6 @@ public class EditContactActionForm extends ActionForm
 			errors.add("companyName", new ActionMessage("form.contact.companyName.error.size"));
 		}
 		
-		/* PhoneNumber */
-		if ((this.phoneKind != "" && this.phoneKind.length() < 3) || this.phoneKind.length() > 10)
-		{
-			errors.add("phoneKind", new ActionMessage("form.contact.phoneKind.error.size"));
-		}
-		if ((this.phoneNumber != "" && this.phoneNumber.length() < 10) || this.phoneKind.length() > 15)
-		{
-			errors.add("phoneNumber", new ActionMessage("form.contact.phoneNumber.error.size"));
-		}
-		
 		/* Adress */
 		if ((this.street != "" && this.street.length() < 1) || this.street.length() > 100)
 		{
@@ -234,14 +205,14 @@ public class EditContactActionForm extends ActionForm
 		
 		if(!errors.isEmpty()) 
 		{
-			PhoneNumber phone = new PhoneNumber(Integer.parseInt(this.idPhone), this.phoneKind, this.phoneNumber);
 			Address adress = new Address(Integer.parseInt(this.idAdress), this.street, this.city, this.zip, this.country);
-			List<Group> contactGroup = new ArrayList<Group>();
+			Set<Group> contactGroup = new HashSet<Group>();
 			for (String idGroup : this.groups)
 			{
 				contactGroup.add(new Group(Integer.parseInt(idGroup)));
 			}
-			Contact contact = new Contact(Integer.parseInt(this.idCompany), this.numSiret, this.companyName, this.lastName, this.firstName, this.email, adress, phone, contactGroup);
+			Set<PhoneNumber> pns = new HashSet<PhoneNumber>();
+			Contact contact = new Contact(Integer.parseInt(this.idCompany), this.numSiret, this.companyName, this.lastName, this.firstName, this.email, adress, pns, contactGroup);
 			request.setAttribute("contact", contact);
             request.setAttribute("listGroups", this.listGroups);
         }

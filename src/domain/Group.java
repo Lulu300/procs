@@ -4,6 +4,7 @@ public class Group
 {
 	public int id;
 	public String groupName;
+	private int version;
 	
 	public Group(int id)
 	{

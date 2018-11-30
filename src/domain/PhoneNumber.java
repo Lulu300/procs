@@ -6,6 +6,7 @@ public class PhoneNumber
 	public int id;
 	public String phoneKind;
 	public String phoneNumber;
+	private int version;
 	
 	public PhoneNumber(int id, String phoneKind, String phoneNumber)
 	{

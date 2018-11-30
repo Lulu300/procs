@@ -8,6 +8,7 @@
 		<id name="id" type="long" column="ID_ENTREPRISE">
 			<generator class="increment"/>
 		</id>
+		<version name="version" access="field" column="version" />
 		
 		<property name="numsiret" type="string" unique="true">
 			<column name="NUMSIRET" />

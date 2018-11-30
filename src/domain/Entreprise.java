@@ -4,6 +4,7 @@ public class Entreprise {
 	public int id;
 	public String numsiret;
 	public String name;
+	private int version;
 	
 	
 	public Entreprise(int id, String numsiret, String name) {
