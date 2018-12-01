@@ -26,6 +26,7 @@ import domain.GroupDAO;
 import domain.PhoneNumber;
 import domain.PhoneNumberDAO;
 import service.ContactService;
+import service.EntrepriseService;
 
 public class AddContactAction extends Action {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
@@ -35,7 +36,7 @@ public class AddContactAction extends Action {
             return pMapping.findForward("connection");
         }
         
-        final ContactService contactService = new ContactService();
+        final EntrepriseService entrepriseService = new EntrepriseService();
         		
 		final AddContactActionForm lForm = (AddContactActionForm) pForm;
 		
@@ -94,8 +95,8 @@ public class AddContactAction extends Action {
 			}
 		}
 		
-		Contact contact = new Contact(numSiret, companyName, lastName, firstName, email, address, phoneNumbers, listContactGroup);
-		String res = contactService.saveOrUpdate(contact);
+		Entreprise entreprise = new Entreprise(lastName, firstName, email, address, phoneNumbers, listContactGroup, numSiret, companyName);
+		String res = entrepriseService.saveOrUpdate(entreprise);
 		return pMapping.findForward("success");
 		/* final ContactDAO lContactDAO = new ContactDAO();
 		final String idContact = lContactDAO.addContact(contact);

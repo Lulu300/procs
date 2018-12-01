@@ -1,20 +1,20 @@
 package domain;
 
-public class Entreprise {
-	public int id;
+import java.util.Set;
+
+public class Entreprise extends Contact {
 	public String numsiret;
 	public String name;
-	private int version;
 	
 	
-	public Entreprise(int id, String numsiret, String name) {
-		this.id = id;
+	public Entreprise(int id, String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups, String numsiret, String name) {
+		super(id, lastName, firstName, email, address, phoneNumbers, groups);
 		this.numsiret = numsiret;
 		this.name = name;
 	}
 	
-	public Entreprise(String numsiret, String name) {
-		this.id = -1;
+	public Entreprise(String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups, String numsiret, String name) {
+		super(lastName, firstName, email, address, phoneNumbers, groups);
 		this.numsiret = numsiret;
 		this.name = name;
 	}

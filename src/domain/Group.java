@@ -1,10 +1,13 @@
 package domain;
 
-public class Group 
-{
+import java.io.Serializable;
+
+public class Group implements Serializable {
+
+	private static final long serialVersionUID = -2594594472505624951L;
 	public int id;
 	public String groupName;
-	private int version;
+	public long version;
 	
 	public Group(int id)
 	{

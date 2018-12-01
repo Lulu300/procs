@@ -47,11 +47,11 @@ public class EntrepriseDAO extends DAO {
 	
 	public List<Entreprise> getAllEntreprises() {
 		List<Entreprise> entreprises = new ArrayList<Entreprise>();
-		StringBuffer request = new StringBuffer();
-		request.append("SELECT entreprise FROM Entreprise entreprise");
+		super.beginTransaction();
 		for (final Object o : super.getSession().createCriteria(Entreprise.class).list()) {
 			entreprises.add((Entreprise) o);
 		}
+		super.endTransaction();
 		return entreprises;
 	}
 }

@@ -13,7 +13,9 @@ import org.apache.struts.action.ActionMapping;
 
 import domain.Contact;
 import domain.ContactDAO;
+import domain.Entreprise;
 import service.ContactService;
+import service.EntrepriseService;
 
 public class ListContactAction extends Action {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
@@ -23,10 +25,10 @@ public class ListContactAction extends Action {
             return pMapping.findForward("connection");
         }
         
-        final ContactService contactService = new ContactService();
-        List<Contact> contacts = contactService.getAllContacts();
+        final EntrepriseService entrepriseService = new EntrepriseService();
+        List<Entreprise> entreprises = entrepriseService.getAllEntreprises();
 		
-		pRequest.setAttribute("contacts", contacts);
+		pRequest.setAttribute("contacts", entreprises);
 		
 		return pMapping.findForward("listContacts");
 	}

@@ -1,19 +1,22 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-public class Contact extends Entreprise {
+public class Contact implements Serializable {
 
+	private static final long serialVersionUID = -2239017619970927960L;
+	public int id;
 	public String lastName;
 	public String firstName;
 	public String email;
 	public Address address;
 	public Set<PhoneNumber> phoneNumbers;
 	public Set<Group> groups;
+	public long version;
 
-	public Contact(int id, String numsiret, String name, String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
-		super(id, numsiret, name);
+	public Contact(int id, String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
@@ -22,8 +25,7 @@ public class Contact extends Entreprise {
 		this.groups = groups;
 	}
 	
-	public Contact(String numsiret, String name, String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
-		super(numsiret, name);
+	public Contact(String lastName, String firstName, String email, Address address, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;

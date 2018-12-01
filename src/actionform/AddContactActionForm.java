@@ -39,8 +39,7 @@ public class AddContactActionForm extends ActionForm
 	private List<Group> listGroups;
 	private String[] groups;
 	
-	public AddContactActionForm() 
-	{
+	public AddContactActionForm() {
 		super();
 		
 		GroupDAO lGroupDAO = new GroupDAO();

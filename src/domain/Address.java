@@ -1,13 +1,16 @@
 package domain;
 
-public class Address {
+import java.io.Serializable;
 
+public class Address implements Serializable {
+
+	private static final long serialVersionUID = 4360374440827926118L;
 	public int id;
 	public String street;
 	public String city;
 	public String zip;
 	public String country;
-	private int version;
+	public long version;
 	
 	public Address(int id)
 	{

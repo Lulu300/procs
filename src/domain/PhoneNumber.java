@@ -1,12 +1,14 @@
 package domain;
 
-public class PhoneNumber 
-{
+import java.io.Serializable;
 
+public class PhoneNumber implements Serializable {
+
+	private static final long serialVersionUID = -2309726161885701701L;
 	public int id;
 	public String phoneKind;
 	public String phoneNumber;
-	private int version;
+	public long version;
 	
 	public PhoneNumber(int id, String phoneKind, String phoneNumber)
 	{
