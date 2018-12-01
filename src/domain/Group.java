@@ -4,42 +4,41 @@ import java.io.Serializable;
 
 public class Group implements Serializable {
 
-	private static final long serialVersionUID = -2594594472505624951L;
-	public int id;
-	public String groupName;
+	public long id;
+	public String name;
 	public long version;
 	
-	public Group(int id)
+	public Group(long id)
 	{
 		this.id = id;
-		this.groupName = "";
+		this.name = "";
 	}
 	
 	public Group(String groupName)
 	{
 		this.id = -1;
-		this.groupName = groupName;
+		this.name = groupName;
 	}
 	
-	public Group(int id, String groupName)
+	public Group(long id, String groupName)
 	{
 		this.id = id;
-		this.groupName = groupName;
+		this.name = groupName;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public String getName() {
+		return name;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setName(String groupName) {
+		this.name = groupName;
 	}
 }

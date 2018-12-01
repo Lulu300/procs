@@ -4,14 +4,14 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="domain">
-	<class name="Group" table="group">
-		<id name="id" type="long" column="ID_GROUP">
+	<class name="Group" table="GROUP_TABLE">
+		<id name="id" type="long" column="ID_CONTACT">
 			<generator class="increment"/>
 		</id>
-		<version name="version" access="field" column="VERSION" type="long" generated="always"/>
+		<version name="version" access="field" column="version" type="long" generated="always"/>
 		
-		<property name="groupName" type="string">
-			<column name="GROUPNAME" />
+		<property name="name" type="string">
+			<column name="GROUP_NAME" />
 		</property>
 	</class>
 </hibernate-mapping>

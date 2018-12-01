@@ -28,11 +28,12 @@ public class InfoContactForm extends Action
 		
 		/* final EntrepriseDAO lEntrepriseDAO = new EntrepriseDAO();
 		List<Entreprise> entreprises = lEntrepriseDAO.getAllEntreprises();
-		pRequest.setAttribute("entreprises", entreprises);
+		pRequest.setAttribute("entreprises", entreprises); */
+        
 		
 		final GroupDAO lGroupDAO = new GroupDAO();
 		List<Group> listGroups = lGroupDAO.getAllGroups();
-		pRequest.setAttribute("listGroups", listGroups); */
+		pRequest.setAttribute("listGroups", listGroups);
 		
 		return pMapping.findForward("addContact");
 	}

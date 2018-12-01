@@ -115,13 +115,14 @@
 			</div>
 		</div>
 		<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
-		<div class="six wide field">
-			<html:select property="entreprise" styleClass="ui fluid dropdown">
-				<html:option value="0"><bean:message key="form.contact.entreprise.choice"/></html:option>
-				<html:optionsCollection name="entreprises" value="id" label="name"/>
-			</html:select>
-			<div class="ui error message">
-   				<p><html:errors property="entreprise"/></p>
+		<div class="two fields">
+			<div class="field">
+				<label for="numSiret">NumSiret</label>
+				<html:text property="numSiret" size="14" maxlength="14"/>
+			</div>
+			<div class="field">
+				<label for="companyName">companyName</label>
+				<html:text property="companyName" size="50" maxlength="50"/>
 			</div>
 		</div>
 		<h4 class="ui dividing header"><bean:message key="form.contact.group"/></h4>

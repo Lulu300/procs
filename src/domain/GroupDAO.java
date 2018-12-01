@@ -46,12 +46,11 @@ public class GroupDAO extends DAO {
 	
 	public List<Group> getAllGroups() {
 		List<Group> groups = new ArrayList<Group>();
-		StringBuffer request = new StringBuffer();
-		request.append("SELECT group FROM Group group");
-		Query query = super.getSession().createQuery(request.toString());
-		for (final Object o : query.list()) {
-		    groups.add((Group) o);
+		super.beginTransaction();
+		for (final Object o : super.getSession().createCriteria(Group.class).list()) {
+			groups.add((Group) o);
 		}
+		super.endTransaction();
 		return groups;
 	}
 }
