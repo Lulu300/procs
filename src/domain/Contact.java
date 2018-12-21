@@ -5,7 +5,8 @@ public class Contact {
 	public String lastName;
 	public String firstName;
 	public String email;
-	
+	private int version;
+
 	public Contact() {}
 
 	public Contact(int id, String lastName, String firstName, String email) {
@@ -18,6 +19,14 @@ public class Contact {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public int getId() {
