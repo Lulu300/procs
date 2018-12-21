@@ -9,7 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.Contact;
+import models.Contact;
 import service.ContactService;
 
 public class InfoContactEditionForm extends Action 

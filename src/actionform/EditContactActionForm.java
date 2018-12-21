@@ -1,6 +1,8 @@
 package actionform;
 
 import domain.*;
+import models.Contact;
+
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;

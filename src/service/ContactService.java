@@ -2,8 +2,8 @@ package service;
 
 import java.util.List;
 
-import domain.Contact;
 import domain.ContactDAO;
+import models.Contact;
 
 public class ContactService {
 	

@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 
 import domain.DAO;
-import domain.Contact;
+import models.Contact;
 
 
 public class ContactDAO extends DAO 

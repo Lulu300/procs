@@ -9,13 +9,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.Contact;
+import models.Contact;
 import service.ContactService;
 
-public class RemoveContactAction extends Action 
-{
-	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
-	{
+public class RemoveContactAction extends Action {
+	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
@@ -26,13 +24,13 @@ public class RemoveContactAction extends Action
         
 		int id = -1;
 		id = Integer.parseInt(pRequest.getParameter("id"));
-		try
-		{
+		try {
 			Contact contact = contactService.getContact(id);
 			contactService.removeContact(contact);
 		}
 		catch (Exception e) {
-			
+			e.printStackTrace();
+			return pMapping.findForward("error");
 		}
 
 		return pMapping.findForward("end");

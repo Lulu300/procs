@@ -1,6 +1,5 @@
 package servletaction;
 
-import domain.Contact;
 import service.ContactService;
 
 import java.util.List;
@@ -13,6 +12,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import models.Contact;
 
 public class ListContactAction extends Action {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {

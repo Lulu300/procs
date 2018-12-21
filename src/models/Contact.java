@@ -1,4 +1,4 @@
-package domain;
+package models;
 
 public class Contact {
 	public int id;

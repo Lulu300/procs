@@ -15,6 +15,6 @@
 		<property name="hbm2ddl.auto">create</property>
 		<property name="hibernate.show_sql">true</property>
 		
-		<mapping resource="domain/Contact.hbm.xml" />
+		<mapping resource="models/Contact.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

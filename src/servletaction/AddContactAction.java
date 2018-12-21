@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.AddContactActionForm;
-import domain.Contact;
+import models.Contact;
 import service.ContactService;
 
 public class AddContactAction extends Action {

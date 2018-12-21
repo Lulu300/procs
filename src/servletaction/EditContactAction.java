@@ -10,8 +10,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.EditContactActionForm;
-import domain.Contact;
 import domain.ContactDAO;
+import models.Contact;
 import service.ContactService;
 import util.HibernateUtil;
 
