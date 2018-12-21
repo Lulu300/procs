@@ -73,7 +73,7 @@
 		</tbody>
 	</table>
 	
-	<logic:iterate name="contacts" id="contact">
+	<logic:iterate name="contacts" id="contacts">
 		<div class="ui modal" id="modal-<bean:write name="contact" property="id"/>">
 			<i class="close icon"></i>
 	  		<div class="header"><bean:message key="main.contact.detail"/></div>
@@ -90,46 +90,6 @@
 					</div>
 					<div class="sixteen wide column">
 						<p><span style="font-weight: bold;"><bean:message key="form.contact.email.label"/></span>: <bean:write name="contact" property="email"/></p>
-					</div>
-					
-					<div class="sixteen wide column">
-						<h4 class="ui dividing header"><bean:message key="form.contact.phone"/></h4>
-						<bean:define id="phoneNumberCanvas" name="contact" property="phoneNumber"/>
-					</div>
-					<div class="eight wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.phoneKind.label"/></span>: <bean:write name="phoneNumberCanvas" property="phoneKind"/></p>
-					</div>
-					<div class="eight wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.phoneNumber.label"/></span>: <bean:write name="phoneNumberCanvas" property="phoneNumber"/></p>
-					</div>
-					
-					<div class="sixteen wide column">
-						<h4 class="ui dividing header"><bean:message key="form.contact.adress"/></h4>
-						<bean:define id="adressCanvas" name="contact" property="adress"/>
-					</div>
-					<div class="eight wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.country.label"/></span>: <bean:write name="adressCanvas" property="country"/></p>
-					</div>
-					<div class="eight wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.city.label"/></span>: <bean:write name="adressCanvas" property="city"/></p>
-					</div>
-					<div class="three wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.zip.label"/></span>: <bean:write name="adressCanvas" property="zip"/></p>
-					</div>
-					<div class="thirteen wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.street.label"/></span>: <bean:write name="adressCanvas" property="street"/></p>
-					</div>
-					
-					<div class="sixteen wide column">
-						<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
-						<bean:define id="entrepriseCanvas" name="contact" property="entreprise"/>
-					</div>
-					<div class="twelve wide column">
-						<p><span style="font-weight: bold;"><bean:message key="form.contact.entreprise"/></span>: 
-							<logic:greaterThan name="entrepriseCanvas" property="id" value="-1">
-								<bean:write name="entrepriseCanvas" property="name"/>
-							</logic:greaterThan>
-						</p>
 					</div>
 				</div>
 	  		</div>

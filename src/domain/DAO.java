@@ -7,27 +7,20 @@ import util.HibernateUtil;
 
 public class DAO {
 
-    private Session session;
     private Transaction tx;
 
     DAO() {
         super();
-        try {
-            this.session = HibernateUtil.getSessionFactory().getCurrentSession();
-            this.tx = null;
-        } catch (Exception e) {
-            this.session = null;
-            e.printStackTrace();
-        }
+        this.tx = null;
     }
 
     Session getSession() {
-        return this.session;
+        return HibernateUtil.getSessionFactory().getCurrentSession();
     }
 
     void beginTransaction() {
         try {
-            this.tx = this.session.beginTransaction();
+            this.tx = this.getSession().beginTransaction();
         } catch (Exception e) {
             e.printStackTrace();
         }

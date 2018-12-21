@@ -66,96 +66,13 @@
    				<p><html:errors property="email"/></p>
 			</div>
 		</div>
-		<h4 class="ui dividing header"><bean:message key="form.contact.phone"/></h4>
-		<bean:define id="phoneCanvas" name="contact" property="phoneNumber"/>
-		<input type="hidden" name="idPhone" value="<bean:write name="phoneCanvas" property="id"/>">
-		<div class="fields">
-			<div class="three wide field">
-				<label for="phoneKind"><bean:message key="form.contact.phoneKind.label"/></label>
-				<html:text name="phoneCanvas" property="phoneKind" size="10" maxlength="10" styleId="phoneKind"/>
-				<div class="ui error message">
-	   				<p><html:errors property="phoneKind"/></p>
-				</div>
-			</div>
-			<div class="six wide field">
-				<label for="phoneNumber"><bean:message key="form.contact.phoneNumber.label"/></label>
-				<html:text name="phoneCanvas" property="phoneNumber" size="15" maxlength="15" styleId="phoneNumber"/>
-				<div class="ui error message">
-	   				<p><html:errors property="phoneNumber"/></p>
-				</div>
-			</div>
-		</div>
-		<h4 class="ui dividing header"><bean:message key="form.contact.adress"/></h4>
-		<bean:define id="adressCanvas" name="contact" property="adress"/>
-		<input type="hidden" name="idAdress" value="<bean:write name="adressCanvas" property="id"/>">
-		<div class="two fields">
-			<div class="field">
-				<label for="country"><bean:message key="form.contact.country.label"/></label>
-				<html:text name="adressCanvas" property="country" size="50" maxlength="50" styleId="country"/>
-				<div class="ui error message">
-	   				<p><html:errors property="country"/></p>
-				</div>
-			</div>
-			<div class="field">
-				<label for="city"><bean:message key="form.contact.city.label"/></label>
-				<html:text name="adressCanvas" property="city" size="50" maxlength="50" styleId="city"/>
-				<div class="ui error message">
-	   				<p><html:errors property="city"/></p>
-				</div>
-			</div>
-		</div>
-		<div class="fields">
-			<div class="three wide field">
-				<label for="zip"><bean:message key="form.contact.zip.label"/></label>
-				<html:text name="adressCanvas" property="zip" size="50" maxlength="50" styleId="zip"/>
-				<div class="ui error message">
-	   				<p><html:errors property="zip"/></p>
-				</div>
-			</div>
-			<div class="thirteen wide field">
-				<label for="street"><bean:message key="form.contact.street.label"/></label>
-				<html:text name="adressCanvas" property="street" size="50" maxlength="50" styleId="street"/>
-				<div class="ui error message">
-	   				<p><html:errors property="street"/></p>
-				</div>
-			</div>
-		</div>
-		<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
-		<bean:define id="entrepriseCanvas" name="contact" property="entreprise"/>
-		<div class="six wide field">
-			<html:select property="entreprise" styleClass="ui fluid dropdown">
-				<html:option value="-1"><bean:message key="form.contact.entreprise.choice"/></html:option>
-				<html:optionsCollection name="entreprises" value="id" label="name"/>
-			</html:select>
-			<div class="ui error message">
-   				<p><html:errors property="entreprise"/></p>
-			</div>
-		</div>
-		<h4 class="ui dividing header"><bean:message key="form.contact.group"/></h4>
-		<bean:define id="groupsCanvas" name="contact" property="groups"/>
-		<div class="six wide field">
-			<html:select property="groups" multiple="" styleClass="ui fluid dropdown">
-				<html:optionsCollection name="listGroups" value="id" label="groupName"/>
-			</html:select>
-			<div class="ui error message">
-   				<p><html:errors property="groups"/></p>
-			</div>
-		</div>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.edit"/></html:submit>
    </html:form> 
 </div>
 
 <script>
 $(document).ready(function ()
-{
-	
-	<logic:iterate name="groupsCanvas" id="group">
-	console.log($('select[name="groups"] option[value="<bean:write name="group" property="id"/>"]'));
-	$('select[name="groups"] option[value="<bean:write name="group" property="id"/>"]').attr('selected','selected');
-	</logic:iterate>
-	
-	$('select[name="entreprise"] option[value="<bean:write name="entrepriseCanvas" property="id"/>"]').attr('selected','selected');
-	
+{	
 	$('.ui.dropdown')
 	  .dropdown()
 	;

@@ -1,5 +1,8 @@
 package servletaction;
 
+import domain.Contact;
+import service.ContactService;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +14,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.Contact;
-import domain.ContactDAO;
-import domain.Entreprise;
-import service.ContactService;
-import service.EntrepriseService;
-
 public class ListContactAction extends Action {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		
@@ -24,11 +21,11 @@ public class ListContactAction extends Action {
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }
-        
-        final EntrepriseService entrepriseService = new EntrepriseService();
-        List<Entreprise> entreprises = entrepriseService.getAllEntreprises();
-		
-		pRequest.setAttribute("contacts", entreprises);
+            
+        final ContactService contactService = new ContactService();
+        List<Contact> contacts = contactService.getAllContacts();
+					
+		pRequest.setAttribute("contacts", contacts);
 		
 		return pMapping.findForward("listContacts");
 	}

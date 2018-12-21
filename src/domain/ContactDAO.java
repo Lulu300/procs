@@ -2,6 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Query;
+
 import domain.DAO;
 import domain.Contact;
 
@@ -19,6 +22,7 @@ public class ContactDAO extends DAO
 			super.getSession().saveOrUpdate(contact);
 			res = "Successfully saving/updating contact";
 		} catch (Exception e) {
+			res = "failed to save or update";
 			e.printStackTrace();
 		} finally {
 			super.endTransaction();
@@ -27,7 +31,17 @@ public class ContactDAO extends DAO
 	}
 	
 	public Contact getContact(int id) {
-		return (Contact) super.getSession().get(Contact.class, id);
+		Contact contact = null;
+		super.beginTransaction();
+		try {
+			contact = (Contact) super.getSession().get(Contact.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.endTransaction();
+		}
+		return contact;
+		
 	}
 	
 	public String removeContact(Contact contact) {
@@ -45,13 +59,16 @@ public class ContactDAO extends DAO
 	
 	public List<Contact> getAllContacts() {
 		List<Contact> contacts = new ArrayList<Contact>();
-		StringBuffer request = new StringBuffer();
-		request.append("SELECT contact FROM Contact contact");
+		
 		super.beginTransaction();
-		for (final Object o : super.getSession().createCriteria(Contact.class).list()) {
-			contacts.add((Contact) o);
+		try {
+			Query requete = super.getSession().createQuery("select distinct contact from Contact contact");
+			contacts = requete.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.endTransaction();
 		}
-		super.endTransaction();
 		return contacts;
 	}
 

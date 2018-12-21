@@ -16,8 +16,5 @@
 		<property name="hibernate.show_sql">true</property>
 		
 		<mapping resource="domain/Contact.hbm.xml" />
-		<mapping resource="domain/Address.hbm.xml" />
-		<mapping resource="domain/Group.hbm.xml" />
-		<mapping resource="domain/PhoneNumber.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
