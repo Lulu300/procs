@@ -47,6 +47,7 @@ public class ContactDAO extends DAO
 	public String removeContact(Contact contact) {
 		String res = null;
 		try {
+			super.beginTransaction();
 			super.getSession().delete(contact);
 			res = "Successfully removing contact with id " + contact.getId();
 		} catch (Exception e) {
