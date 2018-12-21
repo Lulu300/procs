@@ -18,7 +18,44 @@ public class AddContactActionForm extends ActionForm
 	private String firstName = null;
 	private String email = null;
 	
+	private String street = null;
+	private String city = null;
+	private String zip = null;
+	private String country = null;
 	
+	
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public AddContactActionForm() {
 		super();
 	}
@@ -68,6 +105,24 @@ public class AddContactActionForm extends ActionForm
 		if (this.email == null || this.email.length() < 5 || this.email.length() > 75)
 		{
 			errors.add("email", new ActionMessage("form.contact.email.error"));
+		}
+		
+		/* Adress */
+		if ((this.street != "" && this.street.length() < 1) || this.street.length() > 100)
+		{
+			errors.add("street", new ActionMessage("form.contact.street.error.size"));
+		}
+		if ((this.city != "" && this.city.length() < 1) || this.city.length() > 50)
+		{
+			errors.add("city", new ActionMessage("form.contact.city.error.size"));
+		}
+		if ((this.zip != "" && this.zip.length() < 5) || this.zip.length() > 10)
+		{
+			errors.add("zip", new ActionMessage("form.contact.zip.error.size"));
+		}
+		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50)
+		{
+			errors.add("country", new ActionMessage("form.contact.country.error.size"));
 		}
 		
 		return errors;

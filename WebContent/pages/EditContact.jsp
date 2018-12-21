@@ -66,6 +66,41 @@
    				<p><html:errors property="email"/></p>
 			</div>
 		</div>
+		<h4 class="ui dividing header"><bean:message key="form.contact.adress"/></h4>
+		<bean:define id="adresse" name="contact" property="adresse"/>
+		<input type="hidden" name="idAdress" value="<bean:write name="adresse" property="id"/>">
+		<div class="two fields">
+			<div class="field">
+				<label for="country"><bean:message key="form.contact.country.label"/></label>
+				<html:text name="adresse" property="country" size="50" maxlength="50" styleId="country"/>
+				<div class="ui error message">
+	   				<p><html:errors property="country"/></p>
+				</div>
+			</div>
+			<div class="field">
+				<label for="city"><bean:message key="form.contact.city.label"/></label>
+				<html:text name="adresse" property="city" size="50" maxlength="50" styleId="city"/>
+				<div class="ui error message">
+	   				<p><html:errors property="city"/></p>
+				</div>
+			</div>
+		</div>
+		<div class="fields">
+			<div class="three wide field">
+				<label for="zip"><bean:message key="form.contact.zip.label"/></label>
+				<html:text name="adresse" property="zip" size="50" maxlength="50" styleId="zip"/>
+				<div class="ui error message">
+	   				<p><html:errors property="zip"/></p>
+				</div>
+			</div>
+			<div class="thirteen wide field">
+				<label for="street"><bean:message key="form.contact.street.label"/></label>
+				<html:text name="adresse" property="street" size="50" maxlength="50" styleId="street"/>
+				<div class="ui error message">
+	   				<p><html:errors property="street"/></p>
+				</div>
+			</div>
+		</div>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.edit"/></html:submit>
    </html:form> 
 </div>

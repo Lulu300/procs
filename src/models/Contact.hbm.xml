@@ -21,5 +21,7 @@
 		<property name="email" type="string">
 			<column name="EMAIL" />
 		</property>
+		
+		<many-to-one name="adresse" column="adresseId" class="Adresse" not-null="true" cascade="all" lazy="false" />
 	</class>
 </hibernate-mapping>

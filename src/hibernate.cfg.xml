@@ -16,5 +16,6 @@
 		<property name="hibernate.show_sql">true</property>
 		
 		<mapping resource="models/Contact.hbm.xml" />
+		<mapping resource="models/Adresse.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

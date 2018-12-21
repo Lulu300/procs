@@ -6,19 +6,30 @@ public class Contact {
 	public String firstName;
 	public String email;
 	private int version;
+	public Adresse adresse;
 
 	public Contact() {}
 
-	public Contact(int id, String lastName, String firstName, String email) {
+	public Contact(int id, String lastName, String firstName, String email, Adresse adresse) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
+		this.adresse = adresse;
 	}
 	
-	public Contact(String lastName, String firstName, String email) {
+	public Contact(String lastName, String firstName, String email, Adresse adresse) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
+		this.adresse = adresse;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 	public int getVersion() {

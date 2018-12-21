@@ -63,8 +63,7 @@ public class ContactDAO extends DAO
 		
 		super.beginTransaction();
 		try {
-			Query requete = super.getSession().createQuery("select distinct contact from Contact contact");
-			contacts = requete.list();
+			contacts = super.getSession().createQuery("FROM Contact").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

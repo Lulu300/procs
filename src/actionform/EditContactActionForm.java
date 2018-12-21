@@ -1,6 +1,7 @@
 package actionform;
 
 import domain.*;
+import models.Adresse;
 import models.Contact;
 
 import org.apache.struts.action.ActionErrors;
@@ -21,6 +22,43 @@ public class EditContactActionForm extends ActionForm
 	private String firstName = null;
 	private String email = null;
 	private String id = null;
+	
+	private String street = null;
+	private String city = null;
+	private String zip = null;
+	private String country = null;
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public EditContactActionForm() 
 	{
@@ -81,10 +119,28 @@ public class EditContactActionForm extends ActionForm
 		{
 			errors.add("email", new ActionMessage("form.contact.email.error"));
 		}
+		/* Adress */
+		if ((this.street != "" && this.street.length() < 1) || this.street.length() > 100)
+		{
+			errors.add("street", new ActionMessage("form.contact.street.error.size"));
+		}
+		if ((this.city != "" && this.city.length() < 1) || this.city.length() > 50)
+		{
+			errors.add("city", new ActionMessage("form.contact.city.error.size"));
+		}
+		if ((this.zip != "" && this.zip.length() < 5) || this.zip.length() > 10)
+		{
+			errors.add("zip", new ActionMessage("form.contact.zip.error.size"));
+		}
+		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50)
+		{
+			errors.add("country", new ActionMessage("form.contact.country.error.size"));
+		}
 		
 		if(!errors.isEmpty()) 
 		{
-			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email);
+			Adresse adresse = new Adresse(this.street, this.city, this.zip, this.country);
+			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse);
 			request.setAttribute("contact", contact);
         }
 		return errors;

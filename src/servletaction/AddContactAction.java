@@ -10,7 +10,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.AddContactActionForm;
+import models.Adresse;
 import models.Contact;
+import service.AdresseService;
 import service.ContactService;
 
 public class AddContactAction extends Action {
@@ -22,6 +24,7 @@ public class AddContactAction extends Action {
         }
         
         final ContactService contactService = new ContactService();
+        final AdresseService adresseService = new AdresseService();
         		
 		final AddContactActionForm lForm = (AddContactActionForm) pForm;
 		
@@ -30,7 +33,15 @@ public class AddContactAction extends Action {
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
 		
-		Contact contact = new Contact(lastName, firstName, email);
+		final String street = lForm.getStreet();
+		final String city = lForm.getCity();
+		final String zip = lForm.getZip();
+		final String country = lForm.getCountry();
+		
+		Adresse adresse = new Adresse(street, city, zip, country);
+		adresseService.addAdresse(adresse);
+		
+		Contact contact = new Contact(lastName, firstName, email, adresse);
 
 		String res = contactService.saveOrUpdate(contact);
 		return pMapping.findForward("success");

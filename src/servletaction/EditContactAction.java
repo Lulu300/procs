@@ -11,7 +11,9 @@ import org.apache.struts.action.ActionMapping;
 
 import actionform.EditContactActionForm;
 import domain.ContactDAO;
+import models.Adresse;
 import models.Contact;
+import service.AdresseService;
 import service.ContactService;
 import util.HibernateUtil;
 
@@ -26,6 +28,7 @@ public class EditContactAction extends Action {
         }
 		
         ContactService contactService = new ContactService();
+        final AdresseService adresseService = new AdresseService();
 		final EditContactActionForm lForm = (EditContactActionForm) pForm;
 		
 		/* Contact */
@@ -34,18 +37,27 @@ public class EditContactAction extends Action {
 		final String email = lForm.getEmail();
 		final int id = Integer.parseInt(lForm.getId());
 		
+		final String street = lForm.getStreet();
+		final String city = lForm.getCity();
+		final String zip = lForm.getZip();
+		final String country = lForm.getCountry();
+		final int idA = Integer.parseInt(lForm.getId());
+		
 		
 		Contact contact = contactService.getContact(id);
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);
 		
+		Adresse adresse = adresseService.getAdresse(idA);
+		adresse.setStreet(street);
+		adresse.setCity(city);
+		adresse.setZip(zip);
+		adresse.setCountry(country);
+		
+		contact.setAdresse(adresse);
+		
 		try {
-			/*
-			Session s = HibernateUtil.getSessionFactory().getCurrentSession();
-			Transaction tx = s.beginTransaction();
-			s.saveOrUpdate(contact);
-			tx.commit(); */
 			contactService.saveOrUpdate(contact);
 			return pMapping.findForward("success");
 		} catch (Exception e) {
