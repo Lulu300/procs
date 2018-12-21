@@ -9,6 +9,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import domain.Contact;
+import service.ContactService;
+
 public class RemoveContactAction extends Action 
 {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
@@ -19,13 +22,18 @@ public class RemoveContactAction extends Action
             return pMapping.findForward("connection");
         }
         
+        final ContactService contactService = new ContactService();
+        
 		int id = -1;
+		id = Integer.parseInt(pRequest.getParameter("id"));
 		try
 		{
-			id = Integer.parseInt(pRequest.getParameter("id"));
+			Contact contact = contactService.getContact(id);
+			contactService.removeContact(contact);
 		}
-		catch (Exception e) {}
-		String lError;
+		catch (Exception e) {
+			
+		}
 
 		return pMapping.findForward("end");
 	}

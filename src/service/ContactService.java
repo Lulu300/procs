@@ -26,7 +26,7 @@ public class ContactService {
 	}
 	
 	public String removeContact(Contact contact) {
-		return this.removeContact(contact);
+		return this.contactDAO.removeContact(contact);
 	}
 	
 }
