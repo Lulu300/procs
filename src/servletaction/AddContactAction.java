@@ -8,6 +8,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import actionform.AddContactActionForm;
 import models.Adresse;
@@ -23,8 +25,9 @@ public class AddContactAction extends Action {
             return pMapping.findForward("connection");
         }
         
-        final ContactService contactService = new ContactService();
-        final AdresseService adresseService = new AdresseService();
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        final ContactService contactService = (ContactService) context.getBean("contactService");
+        final AdresseService adresseService = (AdresseService) context.getBean("adresseService");
         		
 		final AddContactActionForm lForm = (AddContactActionForm) pForm;
 		

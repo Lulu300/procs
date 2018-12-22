@@ -8,10 +8,12 @@ public class AdresseService {
 	
 	private AdresseDAO adresseDAO;
 	
-	public AdresseService() {
-		this.adresseDAO = new AdresseDAO();
-	}
+	public AdresseService() {}
 	
+	public void setAdresseDAO(AdresseDAO adresseDAO) {
+		this.adresseDAO = adresseDAO;
+	}
+
 	public void addAdresse(Adresse adresse) {
 		this.adresseDAO.save(adresse);
 	}
