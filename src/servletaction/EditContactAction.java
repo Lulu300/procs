@@ -24,6 +24,8 @@ import util.HibernateUtil;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class EditContactAction extends Action {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
@@ -32,9 +34,10 @@ public class EditContactAction extends Action {
             return pMapping.findForward("connection");
         }
 		
-        ContactService contactService = new ContactService();
-        PhoneService phoneService = new PhoneService();
-        final AdresseService adresseService = new AdresseService();
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        final ContactService contactService = (ContactService) context.getBean("contactService");
+        final AdresseService adresseService = (AdresseService) context.getBean("adresseService");
+        final PhoneService phoneService = new PhoneService();
 		final EditContactActionForm lForm = (EditContactActionForm) pForm;
 		
 		/* Contact */

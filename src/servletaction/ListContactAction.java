@@ -12,6 +12,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import models.Contact;
 
@@ -22,8 +24,8 @@ public class ListContactAction extends Action {
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }
-            
-        final ContactService contactService = new ContactService();
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        final ContactService contactService = (ContactService) context.getBean("contactService");
         List<Contact> contacts = contactService.getAllContacts();
 					
 		pRequest.setAttribute("contacts", contacts);

@@ -2,6 +2,9 @@ package service;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import domain.ContactDAO;
 import models.Contact;
 
@@ -9,8 +12,10 @@ public class ContactService {
 	
 	private ContactDAO contactDAO;
 	
-	public ContactService() {
-		this.contactDAO = new ContactDAO();
+	public ContactService() {}
+	
+	public void setContactDAO(ContactDAO contactDAO) {
+		this.contactDAO = contactDAO;
 	}
 	
 	public String saveOrUpdate(Contact contact) {
