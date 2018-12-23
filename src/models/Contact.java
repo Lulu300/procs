@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Set;
+
 public class Contact {
 	public int id;
 	public String lastName;
@@ -7,21 +9,32 @@ public class Contact {
 	public String email;
 	private int version;
 	public Adresse adresse;
+	public Set<PhoneNumber> phoneNumbers;
 
 	public Contact() {}
-
-	public Contact(int id, String lastName, String firstName, String email, Adresse adresse) {
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-		this.adresse = adresse;
-	}
 	
-	public Contact(String lastName, String firstName, String email, Adresse adresse) {
+	public Contact(String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
 		this.adresse = adresse;
+		this.phoneNumbers = phoneNumbers;
+	}
+	public Contact(int id, String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers) {
+		this.id = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.adresse = adresse;
+		this.phoneNumbers = phoneNumbers;
+	}
+
+	public Set<PhoneNumber> getPhoneNumbers() {
+		return phoneNumbers;
+	}
+
+	public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
 	}
 
 	public Adresse getAdresse() {

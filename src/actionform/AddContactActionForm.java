@@ -23,7 +23,64 @@ public class AddContactActionForm extends ActionForm
 	private String zip = null;
 	private String country = null;
 	
+	private String phoneKind1 = null;
+	private String phoneNumber1 = null;
 	
+	private String phoneKind2 = null;
+	private String phoneNumber2 = null;
+	
+	private String phoneKind3 = null;
+	private String phoneNumber3 = null;
+	
+
+	public String getPhoneKind1() {
+		return phoneKind1;
+	}
+
+	public void setPhoneKind1(String phoneKind1) {
+		this.phoneKind1 = phoneKind1;
+	}
+
+	public String getPhoneNumber1() {
+		return phoneNumber1;
+	}
+
+	public void setPhoneNumber1(String phoneNumber1) {
+		this.phoneNumber1 = phoneNumber1;
+	}
+
+	public String getPhoneKind2() {
+		return phoneKind2;
+	}
+
+	public void setPhoneKind2(String phoneKind2) {
+		this.phoneKind2 = phoneKind2;
+	}
+
+	public String getPhoneNumber2() {
+		return phoneNumber2;
+	}
+
+	public void setPhoneNumber2(String phoneNumber2) {
+		this.phoneNumber2 = phoneNumber2;
+	}
+
+	public String getPhoneKind3() {
+		return phoneKind3;
+	}
+
+	public void setPhoneKind3(String phoneKind3) {
+		this.phoneKind3 = phoneKind3;
+	}
+
+	public String getPhoneNumber3() {
+		return phoneNumber3;
+	}
+
+	public void setPhoneNumber3(String phoneNumber3) {
+		this.phoneNumber3 = phoneNumber3;
+	}
+
 	public String getStreet() {
 		return street;
 	}
@@ -123,6 +180,33 @@ public class AddContactActionForm extends ActionForm
 		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50)
 		{
 			errors.add("country", new ActionMessage("form.contact.country.error.size"));
+		}
+		/* PhoneNumber */
+		if ((this.phoneKind1 != "" && this.phoneKind1.length() < 3) || this.phoneKind1.length() > 10)
+		{
+			errors.add("phoneKind1", new ActionMessage("form.contact.phoneKind.error.size"));
+		}
+		if ((this.phoneNumber1 != "" && this.phoneNumber1.length() < 10) || this.phoneNumber1.length() > 15)
+		{
+			errors.add("phoneNumber1", new ActionMessage("form.contact.phoneNumber.error.size"));
+		}
+		
+		if ((this.phoneKind2 != "" && this.phoneKind2.length() < 3) || this.phoneKind2.length() > 10)
+		{
+			errors.add("phoneKind2", new ActionMessage("form.contact.phoneKind.error.size"));
+		}
+		if ((this.phoneNumber2 != "" && this.phoneNumber2.length() < 10) || this.phoneNumber2.length() > 15)
+		{
+			errors.add("phoneNumber2", new ActionMessage("form.contact.phoneNumber.error.size"));
+		}
+		
+		if ((this.phoneKind3 != "" && this.phoneKind3.length() < 3) || this.phoneKind3.length() > 10)
+		{
+			errors.add("phoneKind3", new ActionMessage("form.contact.phoneKind.error.size"));
+		}
+		if ((this.phoneNumber3 != "" && this.phoneNumber3.length() < 10) || this.phoneNumber3.length() > 15)
+		{
+			errors.add("phoneNumber3", new ActionMessage("form.contact.phoneNumber.error.size"));
 		}
 		
 		return errors;

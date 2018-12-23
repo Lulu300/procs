@@ -97,6 +97,55 @@
 				</div>
 			</div>
 		</div>
+		<h4 class="ui dividing header"><bean:message key="form.contact.phone"/></h4>
+		<div class="fields">
+			<div class="three wide field">
+				<label for="phoneKind1"><bean:message key="form.contact.phoneKind.label"/></label>
+				<html:text property="phoneKind1" size="10" maxlength="10" styleId="phoneKind1"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneKind1"/></p>
+				</div>
+			</div>
+			<div class="six wide field">
+				<label for="phoneNumber1"><bean:message key="form.contact.phoneNumber.label"/></label>
+				<html:text property="phoneNumber1" size="15" maxlength="15" styleId="phoneNumber1"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneNumber1"/></p>
+				</div>
+			</div>
+		</div>
+		<div class="fields">
+			<div class="three wide field">
+				<label for="phoneKind2"><bean:message key="form.contact.phoneKind.label"/></label>
+				<html:text property="phoneKind2" size="10" maxlength="10" styleId="phoneKind2"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneKind2"/></p>
+				</div>
+			</div>
+			<div class="six wide field">
+				<label for="phoneNumber2"><bean:message key="form.contact.phoneNumber.label"/></label>
+				<html:text property="phoneNumber2" size="15" maxlength="15" styleId="phoneNumber2"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneNumber2"/></p>
+				</div>
+			</div>
+		</div>
+		<div class="fields">
+			<div class="three wide field">
+				<label for="phoneKind3"><bean:message key="form.contact.phoneKind.label"/></label>
+				<html:text property="phoneKind3" size="10" maxlength="10" styleId="phoneKind3"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneKind3"/></p>
+				</div>
+			</div>
+			<div class="six wide field">
+				<label for="phoneNumber3"><bean:message key="form.contact.phoneNumber.label"/></label>
+				<html:text property="phoneNumber3" size="15" maxlength="15" styleId="phoneNumber3"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneNumber3"/></p>
+				</div>
+			</div>
+		</div>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.add"/></html:submit>
    </html:form> 
 </div>

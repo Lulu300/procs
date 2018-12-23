@@ -107,6 +107,18 @@
 					<div class="thirteen wide column">
 						<p><span style="font-weight: bold;"><bean:message key="form.contact.street.label"/></span>: <bean:write name="adresse" property="street"/></p>
 					</div>
+					<div class="sixteen wide column">
+						<h4 class="ui dividing header"><bean:message key="form.contact.phone"/></h4>
+					</div>
+					<bean:define id="phoneNumbers" name="contact" property="phoneNumbers"/>
+					<logic:iterate name="phoneNumbers" id="phoneNumber">
+						<div class="eight wide column">
+							<p><span style="font-weight: bold;"><bean:message key="form.contact.phoneKind.label"/></span>: <bean:write name="phoneNumber" property="phoneKind"/></p>
+						</div>
+						<div class="eight wide column">
+							<p><span style="font-weight: bold;"><bean:message key="form.contact.phoneNumber.label"/></span>: <bean:write name="phoneNumber" property="phoneNumber"/></p>
+						</div>
+					</logic:iterate>
 				</div>
 	  		</div>
 		</div>

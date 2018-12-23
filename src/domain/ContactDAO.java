@@ -63,7 +63,7 @@ public class ContactDAO extends DAO
 		
 		super.beginTransaction();
 		try {
-			contacts = super.getSession().createQuery("FROM Contact").list();
+			contacts = super.getSession().createQuery("select distinct contact from Contact contact left join fetch contact.phoneNumbers phone").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -71,5 +71,15 @@ public class ContactDAO extends DAO
 		}
 		return contacts;
 	}
-
+	
+	public void merge(Contact contact) {
+		super.beginTransaction();
+		try {
+			super.getSession().merge(contact);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.endTransaction();
+		}
+	}
 }

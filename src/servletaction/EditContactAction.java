@@ -1,5 +1,8 @@
 package servletaction;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,8 +16,10 @@ import actionform.EditContactActionForm;
 import domain.ContactDAO;
 import models.Adresse;
 import models.Contact;
+import models.PhoneNumber;
 import service.AdresseService;
 import service.ContactService;
+import service.PhoneService;
 import util.HibernateUtil;
 
 import org.hibernate.Session;
@@ -28,6 +33,7 @@ public class EditContactAction extends Action {
         }
 		
         ContactService contactService = new ContactService();
+        PhoneService phoneService = new PhoneService();
         final AdresseService adresseService = new AdresseService();
 		final EditContactActionForm lForm = (EditContactActionForm) pForm;
 		
@@ -43,6 +49,27 @@ public class EditContactAction extends Action {
 		final String country = lForm.getCountry();
 		final int idA = Integer.parseInt(lForm.getId());
 		
+		final String[] idPhone = lForm.getIdPhone();
+		final String[] phoneKind = lForm.getPhoneKind();
+		final String[] phoneNumber = lForm.getPhoneNumber();
+		
+		
+		Set<PhoneNumber> phones = new HashSet<>();
+		if (phoneKind.length == phoneNumber.length && phoneKind.length == idPhone.length) {
+			for (int i=0; i<phoneKind.length; i++) {
+				if (phoneKind[i] != "" && phoneNumber[i] != "") {
+					PhoneNumber ph;
+					if (Integer.parseInt(idPhone[i]) != 0) {
+						ph = phoneService.getPhoneNumber(Integer.parseInt(idPhone[i]));
+						ph.setPhoneKind(phoneKind[i]);
+						ph.setPhoneNumber(phoneNumber[i]);
+					} else {
+						ph = new PhoneNumber(phoneKind[i], phoneNumber[i]);
+					}
+					phones.add(ph);
+				}
+			}
+		}
 		
 		Contact contact = contactService.getContact(id);
 		contact.setFirstName(firstName);
@@ -56,9 +83,10 @@ public class EditContactAction extends Action {
 		adresse.setCountry(country);
 		
 		contact.setAdresse(adresse);
+		contact.setPhoneNumbers(phones);
 		
 		try {
-			contactService.saveOrUpdate(contact);
+			contactService.merge(contact);
 			return pMapping.findForward("success");
 		} catch (Exception e) {
 			System.out.println(e);

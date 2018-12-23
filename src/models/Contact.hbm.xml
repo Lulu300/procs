@@ -22,6 +22,10 @@
 			<column name="EMAIL" />
 		</property>
 		
-		<many-to-one name="adresse" column="adresseId" class="Adresse" not-null="true" cascade="all" lazy="false" />
+		<many-to-one name="adresse" column="adresse" class="Adresse" not-null="true" cascade="all" lazy="false" />
+		<set name="phoneNumbers" lazy="false" cascade="all-delete-orphan">
+			<key column="id_contact" />
+			<one-to-many class="PhoneNumber" />
+		</set>
 	</class>
 </hibernate-mapping>

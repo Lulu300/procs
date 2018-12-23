@@ -101,6 +101,23 @@
 				</div>
 			</div>
 		</div>
+		<logic:iterate name="phoneNumbers" id="phone">
+		<input type="hidden" name="idPhone" value="<bean:write name="phone" property="id"/>">
+			<div class="three wide field">
+				<label for="phoneKind"><bean:message key="form.contact.phoneKind.label"/></label>
+				<html:text name="phone" property="phoneKind" size="10" maxlength="10" styleId="phoneKind"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneKind"/></p>
+				</div>
+			</div>
+			<div class="six wide field">
+				<label for="phoneNumber"><bean:message key="form.contact.phoneNumber.label"/></label>
+				<html:text name="phone" property="phoneNumber" size="15" maxlength="15" styleId="phoneNumber"/>
+				<div class="ui error message">
+	   				<p><html:errors property="phoneNumber"/></p>
+				</div>
+			</div>
+		</logic:iterate>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.edit"/></html:submit>
    </html:form> 
 </div>

@@ -3,11 +3,15 @@ package actionform;
 import domain.*;
 import models.Adresse;
 import models.Contact;
+import models.PhoneNumber;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,6 +31,18 @@ public class EditContactActionForm extends ActionForm
 	private String city = null;
 	private String zip = null;
 	private String country = null;
+	
+	private String[] phoneKind = null;
+	private String[] phoneNumber = null;
+	private String[] idPhone = null;
+
+	public String[] getIdPhone() {
+		return idPhone;
+	}
+
+	public void setIdPhone(String[] idPhone) {
+		this.idPhone = idPhone;
+	}
 
 	public String getStreet() {
 		return street;
@@ -103,6 +119,22 @@ public class EditContactActionForm extends ActionForm
 		this.email = email;
 	}
 	
+	public String[] getPhoneKind() {
+		return phoneKind;
+	}
+
+	public void setPhoneKind(String[] phoneKind) {
+		this.phoneKind = phoneKind;
+	}
+
+	public String[] getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String[] phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request)
 	{
 		ActionErrors errors = new ActionErrors();
@@ -138,9 +170,13 @@ public class EditContactActionForm extends ActionForm
 		}
 		
 		if(!errors.isEmpty()) 
-		{
+		{	
+			Set<PhoneNumber> phoneNumbers = new HashSet<PhoneNumber>();
+			for (int i=0; i<this.phoneKind.length; i++) {
+				phoneNumbers.add(new PhoneNumber(this.phoneKind[i], this.phoneNumber[i]));
+			}
 			Adresse adresse = new Adresse(this.street, this.city, this.zip, this.country);
-			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse);
+			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse, phoneNumbers);
 			request.setAttribute("contact", contact);
         }
 		return errors;

@@ -1,5 +1,7 @@
 package servletaction;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import models.Contact;
+import models.PhoneNumber;
 import service.ContactService;
 
 public class InfoContactEditionForm extends Action 
@@ -29,6 +32,20 @@ public class InfoContactEditionForm extends Action
 			int id = Integer.parseInt(s_id);
 			final ContactService contactService = new ContactService();
 			Contact contact = contactService.getContact(id);
+			
+			Set<PhoneNumber> phones = contact.getPhoneNumbers();
+			if (phones.size() == 2) {
+				phones.add(new PhoneNumber("", ""));
+			} else if (phones.size() == 1) {
+				phones.add(new PhoneNumber("", ""));
+				phones.add(new PhoneNumber("", ""));
+			} else if (phones.size() == 0) {
+				phones.add(new PhoneNumber("", ""));
+				phones.add(new PhoneNumber("", ""));
+				phones.add(new PhoneNumber("", ""));
+			}
+			
+			pRequest.setAttribute("phoneNumbers", phones);
 			pRequest.setAttribute("contact", contact);
 		}
 		catch(Exception e) {

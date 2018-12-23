@@ -29,4 +29,8 @@ public class ContactService {
 		return this.contactDAO.removeContact(contact);
 	}
 	
+	public void merge(Contact contact) {
+		this.contactDAO.merge(contact);
+	}
+	
 }
