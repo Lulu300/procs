@@ -14,6 +14,7 @@
 	<!-- DAOs -->
 	<bean id="contactDAO" class="domain.ContactDAO"/>
 	<bean id="adresseDAO" class="domain.AdresseDAO"/>
+	<bean id="phoneDAO" class="domain.PhoneDAO"/>
 	
 	<!-- Services -->
 	<bean id="contactService" class="service.ContactService">
@@ -21,6 +22,9 @@
 	</bean>
 	<bean id="adresseService" class="service.AdresseService">
 		<property name="adresseDAO" ref="adresseDAO"/>
+	</bean>
+	<bean id="phoneService" class="service.PhoneService">
+		<property name="phoneDAO" ref="phoneDAO"/>
 	</bean>
 
 </beans>

@@ -7,8 +7,10 @@ public class PhoneService {
 	
 	private PhoneDAO phoneDAO;
 	
-	public PhoneService() {
-		this.phoneDAO = new PhoneDAO();
+	public PhoneService() {}
+	
+	public void setPhoneDAO(PhoneDAO phoneDAO) {
+		this.phoneDAO = phoneDAO;
 	}
 	
 	public void addPhoneNumber(PhoneNumber phoneNumber) {

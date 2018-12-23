@@ -37,7 +37,7 @@ public class EditContactAction extends Action {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         final ContactService contactService = (ContactService) context.getBean("contactService");
         final AdresseService adresseService = (AdresseService) context.getBean("adresseService");
-        final PhoneService phoneService = new PhoneService();
+        final PhoneService phoneService = (PhoneService) context.getBean("phoneService");
 		final EditContactActionForm lForm = (EditContactActionForm) pForm;
 		
 		/* Contact */
