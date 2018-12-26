@@ -18,5 +18,6 @@
 		<mapping resource="models/Contact.hbm.xml" />
 		<mapping resource="models/Adresse.hbm.xml" />
 		<mapping resource="models/PhoneNumber.hbm.xml" />
+		<mapping resource="models/Group.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

@@ -15,6 +15,7 @@
 	<bean id="contactDAO" class="domain.ContactDAO"/>
 	<bean id="adresseDAO" class="domain.AdresseDAO"/>
 	<bean id="phoneDAO" class="domain.PhoneDAO"/>
+	<bean id="groupDAO" class="domain.GroupDAO"/>
 	
 	<!-- Services -->
 	<bean id="contactService" class="service.ContactService">
@@ -26,5 +27,40 @@
 	<bean id="phoneService" class="service.PhoneService">
 		<property name="phoneDAO" ref="phoneDAO"/>
 	</bean>
-
+	<bean id="groupService" class="service.GroupService">
+		<property name="groupDAO" ref="groupDAO" />
+	</bean>
+	
+	<bean id="FamilyGroup" class="models.Group">
+		<property name="id" value="1" />
+		<property name="name" value="Family" />
+	</bean>
+	<bean id="WorkGroup" class="models.Group">
+		<property name="id" value="2" />
+		<property name="name" value="Work" />
+	</bean>
+	<bean id="FriendsGroup" class="models.Group">
+		<property name="id" value="3" />
+		<property name="name" value="Friends" />
+	</bean>
+	<!--
+	<bean id="addContact1" class="models.Contact">
+		<property name="id" />
+		<property name="lastName" />
+		<property name="firstName" />
+		<property name="email" />
+		<property name="adresse" ref="Adresse1" />
+		<property name="phoneNumbers">
+			<set>
+				<ref bean="phoneNumber1Contact1" />
+				<ref bean="phoneNumber2Contact1" />
+			</set>
+		</property>
+		<property name="groups"> 
+			<set>
+				<ref bean="group1" />
+			</set>
+		</property>
+	</bean>
+	-->
 </beans>

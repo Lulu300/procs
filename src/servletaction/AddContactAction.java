@@ -1,6 +1,5 @@
 package servletaction;
 
-import java.io.Console;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,10 +17,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import actionform.AddContactActionForm;
 import models.Adresse;
 import models.Contact;
+import models.Group;
 import models.PhoneNumber;
 import service.AdresseService;
 import service.ContactService;
-import service.PhoneService;
+import service.GroupService;
 
 public class AddContactAction extends Action {
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
@@ -34,6 +34,7 @@ public class AddContactAction extends Action {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         final ContactService contactService = (ContactService) context.getBean("contactService");
         final AdresseService adresseService = (AdresseService) context.getBean("adresseService");
+        final GroupService groupService = (GroupService) context.getBean("groupService");
         		
 		final AddContactActionForm lForm = (AddContactActionForm) pForm;
 		
@@ -54,6 +55,9 @@ public class AddContactAction extends Action {
 		final String phoneKind3 = lForm.getPhoneKind3();
 		final String phoneNumber3 = lForm.getPhoneNumber3();
 		
+		final String[] groups = lForm.getGroups();
+		
+		Set<Group> contactGroups = new HashSet<>();
 		Set<PhoneNumber> phones = new HashSet<>();
 		
 		if (phoneKind1 != "" && phoneNumber1 != "") {
@@ -71,10 +75,20 @@ public class AddContactAction extends Action {
 			phones.add(phone3);
 		}
 		
+		if (groups != null) {
+			for (String group : groups) {
+				try {
+					int idGroup = Integer.parseInt(group);
+					Group g = groupService.getGroup(idGroup);
+					contactGroups.add(g);
+				} catch (Exception e) { }
+			}
+		}
+		
 		Adresse adresse = new Adresse(street, city, zip, country);
 		adresseService.addAdresse(adresse);
 		
-		Contact contact = new Contact(lastName, firstName, email, adresse, phones);
+		Contact contact = new Contact(lastName, firstName, email, adresse, phones, contactGroups);
 
 		contactService.saveOrUpdate(contact);
 		return pMapping.findForward("success");

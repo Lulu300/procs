@@ -1,8 +1,5 @@
 package servletaction;
 
-import service.ContactService;
-import service.GroupService;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,20 +15,35 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import models.Contact;
 import models.Group;
+import service.ContactService;
+import service.GroupService;
 
-public class ListContactAction extends Action {
-	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
+public class PopulateAction extends Action 
+{
+	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
+	{
 		
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");  
+        final GroupService groupService = (GroupService) context.getBean("groupService");
         final ContactService contactService = (ContactService) context.getBean("contactService");
+        
+        Group work = (Group) context.getBean("FamilyGroup");
+        Group family = (Group) context.getBean("WorkGroup");
+        Group friends = (Group) context.getBean("FriendsGroup");
+        
+        groupService.addGroup(work);
+        groupService.addGroup(family);
+        groupService.addGroup(friends);
+        
+        List<Group> groups = groupService.getAllGroups();
         List<Contact> contacts = contactService.getAllContacts();
        
 		pRequest.setAttribute("contacts", contacts);
-		
+        pRequest.setAttribute("listGroups", groups);
 		return pMapping.findForward("listContacts");
 	}
 }

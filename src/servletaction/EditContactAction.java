@@ -16,9 +16,11 @@ import actionform.EditContactActionForm;
 import domain.ContactDAO;
 import models.Adresse;
 import models.Contact;
+import models.Group;
 import models.PhoneNumber;
 import service.AdresseService;
 import service.ContactService;
+import service.GroupService;
 import service.PhoneService;
 import util.HibernateUtil;
 
@@ -38,6 +40,8 @@ public class EditContactAction extends Action {
         final ContactService contactService = (ContactService) context.getBean("contactService");
         final AdresseService adresseService = (AdresseService) context.getBean("adresseService");
         final PhoneService phoneService = (PhoneService) context.getBean("phoneService");
+        final GroupService groupService = (GroupService) context.getBean("groupService");
+        
 		final EditContactActionForm lForm = (EditContactActionForm) pForm;
 		
 		/* Contact */
@@ -56,6 +60,7 @@ public class EditContactAction extends Action {
 		final String[] phoneKind = lForm.getPhoneKind();
 		final String[] phoneNumber = lForm.getPhoneNumber();
 		
+		final String[] groups = lForm.getGroups();
 		
 		Set<PhoneNumber> phones = new HashSet<>();
 		if (phoneKind.length == phoneNumber.length && phoneKind.length == idPhone.length) {
@@ -74,6 +79,17 @@ public class EditContactAction extends Action {
 			}
 		}
 		
+		Set<Group> contactGroups = new HashSet<Group>();
+		if (groups != null) {
+			for (String group : groups) {
+				try {
+					int idGroup = Integer.parseInt(group);
+					Group g = groupService.getGroup(idGroup);
+					contactGroups.add(g);
+				} catch (Exception e) { }
+			}
+		}
+		
 		Contact contact = contactService.getContact(id);
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);
@@ -87,6 +103,7 @@ public class EditContactAction extends Action {
 		
 		contact.setAdresse(adresse);
 		contact.setPhoneNumbers(phones);
+		contact.setGroups(contactGroups);
 		
 		try {
 			contactService.merge(contact);

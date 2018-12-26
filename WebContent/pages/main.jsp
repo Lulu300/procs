@@ -46,11 +46,16 @@
   </div>
 </div>
 
-<div class="ui container">
-	
+<div class="ui container">	
 	<a style="margin-bottom: 2%;" class="ui labeled icon button" href="ContactCreation.do">
 	  <i class="plus icon"></i>
 	  <bean:message key="form.contact.add.new"/>
+	</a>
+	
+	<a style="margin-bottom: 2%;" class="ui labeled icon button" href="Populate.do">
+	  <i class="plus icon"></i>
+	  Hello darkness my old friend
+	  <i class="plus icon"></i>
 	</a>
 	<table id="contactTable" class="ui celled padded table">
 		<thead>
@@ -136,7 +141,7 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function() {	
 	$('.ui.dropdown')
 	  .dropdown()
 	;
@@ -161,6 +166,7 @@ $(document).ready(function() {
         }
     });
 } );
+
 </script>
 
 </body>

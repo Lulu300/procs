@@ -60,6 +60,11 @@
 		<forward name="error" path="/pages/EditContact.jsp" />
 		<forward name="connection" path="/Connection.do" redirect="true" />
 		</action>
+		
+		<action path="/Populate" type="servletaction.PopulateAction" name="PopulateAction" scope="request" forward="/pages/main.jsp">
+			<forward name="connection" path="/Connection.do" redirect="true" />
+			<forward name="listContacts" path="/pages/main.jsp" />
+		</action>
 
 	</action-mappings>
 	

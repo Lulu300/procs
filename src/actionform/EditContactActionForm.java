@@ -3,14 +3,19 @@ package actionform;
 import domain.*;
 import models.Adresse;
 import models.Contact;
+import models.Group;
 import models.PhoneNumber;
+import service.GroupService;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +40,27 @@ public class EditContactActionForm extends ActionForm
 	private String[] phoneKind = null;
 	private String[] phoneNumber = null;
 	private String[] idPhone = null;
+	
+	private List<Group> listGroups;
+	private String[] groups;
+	
+	final GroupService groupService;
+	
+	public EditContactActionForm() {
+		super();
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		groupService = (GroupService) context.getBean("groupService");
+		this.listGroups = groupService.getAllGroups();
+	}
+	
+	public String[] getGroups() {
+		return groups;
+	}
+
+	public void setGroups(String[] groups) {
+		this.groups = groups;
+	}
 
 	public String[] getIdPhone() {
 		return idPhone;
@@ -74,11 +100,6 @@ public class EditContactActionForm extends ActionForm
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public EditContactActionForm() 
-	{
-		super();
 	}
 	
 	public String getId() {
@@ -175,8 +196,13 @@ public class EditContactActionForm extends ActionForm
 			for (int i=0; i<this.phoneKind.length; i++) {
 				phoneNumbers.add(new PhoneNumber(this.phoneKind[i], this.phoneNumber[i]));
 			}
+			Set<Group> contactGroups = new HashSet<Group>();
+			for (String idGroup : this.groups) {
+				contactGroups.add(groupService.getGroup(Integer.parseInt(idGroup)));
+			}
 			Adresse adresse = new Adresse(this.street, this.city, this.zip, this.country);
-			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse, phoneNumbers);
+			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse, phoneNumbers, contactGroups);
+			request.setAttribute("listGroups", this.listGroups);
 			request.setAttribute("contact", contact);
         }
 		return errors;

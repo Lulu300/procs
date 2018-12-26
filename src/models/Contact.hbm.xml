@@ -27,5 +27,10 @@
 			<key column="id_contact" />
 			<one-to-many class="PhoneNumber" />
 		</set>
+		
+		<set name="groups" table="ContactGroup" lazy="false" cascade="persist">
+			<key column="id"/>
+			<many-to-many class="Group" column="idGroup"/>
+		</set>
 	</class>
 </hibernate-mapping>

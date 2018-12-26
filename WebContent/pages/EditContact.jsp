@@ -121,13 +121,26 @@
 				</div>
 			</div>
 		</logic:iterate>
+		<h4 class="ui dividing header"><bean:message key="form.contact.group"/></h4>
+		<bean:define id="contactGroups" name="contact" property="groups"/>
+		<div class="six wide field">
+			<html:select property="groups" multiple="" styleClass="ui fluid dropdown">
+				<html:optionsCollection name="listGroups" value="id" label="name"/>
+			</html:select>
+			<div class="ui error message">
+   				<p><html:errors property="groups"/></p>
+			</div>
+		</div>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.edit"/></html:submit>
    </html:form> 
 </div>
 
 <script>
-$(document).ready(function ()
-{	
+$(document).ready(function () {
+	<logic:iterate name="contactGroups" id="group">
+	$('select[name="groups"] option[value="<bean:write name="group" property="id"/>"]').attr('selected','selected');
+	</logic:iterate>
+	
 	$('.ui.dropdown')
 	  .dropdown()
 	;

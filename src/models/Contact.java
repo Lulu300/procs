@@ -10,23 +10,34 @@ public class Contact {
 	private int version;
 	public Adresse adresse;
 	public Set<PhoneNumber> phoneNumbers;
+	public Set<Group> groups;
 
 	public Contact() {}
 	
-	public Contact(String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers) {
+	public Contact(String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
 		this.adresse = adresse;
 		this.phoneNumbers = phoneNumbers;
+		this.groups = groups;
 	}
-	public Contact(int id, String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers) {
+	public Contact(int id, String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
 		this.adresse = adresse;
 		this.phoneNumbers = phoneNumbers;
+		this.groups = groups;
+	}
+
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
 	}
 
 	public Set<PhoneNumber> getPhoneNumbers() {

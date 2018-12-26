@@ -4,6 +4,13 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import models.Group;
+import service.GroupService;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,6 +39,24 @@ public class AddContactActionForm extends ActionForm
 	private String phoneKind3 = null;
 	private String phoneNumber3 = null;
 	
+	private List<Group> listGroups;
+	private String[] groups;
+	
+	public AddContactActionForm() {
+		super();
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		final GroupService groupService = (GroupService) context.getBean("groupService");
+		this.listGroups = groupService.getAllGroups();
+	}
+
+	public String[] getGroups() {
+		return groups;
+	}
+
+	public void setGroups(String[] groups) {
+		this.groups = groups;
+	}
 
 	public String getPhoneKind1() {
 		return phoneKind1;
@@ -111,10 +136,6 @@ public class AddContactActionForm extends ActionForm
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public AddContactActionForm() {
-		super();
 	}
 
 	public String getLastName() 
@@ -207,6 +228,10 @@ public class AddContactActionForm extends ActionForm
 		if ((this.phoneNumber3 != "" && this.phoneNumber3.length() < 10) || this.phoneNumber3.length() > 15)
 		{
 			errors.add("phoneNumber3", new ActionMessage("form.contact.phoneNumber.error.size"));
+		}
+		
+		if (!errors.isEmpty()) {
+			request.setAttribute("listGroups", this.listGroups);
 		}
 		
 		return errors;

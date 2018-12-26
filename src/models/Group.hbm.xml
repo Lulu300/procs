@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="models">
+	<class name="Group" table="Groupe">
+		<id name="id" type="int" column="id">
+			<generator class="increment"/>
+		</id>
+		<version name="version" column="VERSION"/>
+
+		<property name="name" type="string" unique="true">
+			<column name="name" />
+		</property>
+	</class>
+</hibernate-mapping>

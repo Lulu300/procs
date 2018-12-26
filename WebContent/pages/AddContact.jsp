@@ -146,6 +146,15 @@
 				</div>
 			</div>
 		</div>
+		<h4 class="ui dividing header"><bean:message key="form.contact.group"/></h4>
+		<div class="six wide field">
+			<html:select property="groups" multiple="" styleClass="ui fluid dropdown">
+				<html:optionsCollection name="listGroups" value="id" label="name"/>
+			</html:select>
+			<div class="ui error message">
+   				<p><html:errors property="groups"/></p>
+			</div>
+		</div>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.add"/></html:submit>
    </html:form> 
 </div>
