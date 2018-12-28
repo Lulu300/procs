@@ -39,6 +39,13 @@ public class PopulateAction extends Action
         groupService.addGroup(family);
         groupService.addGroup(friends);
         
+        Contact bob = (Contact) context.getBean("addContact1");
+        Contact patrick = (Contact) context.getBean("addContact2");
+        Contact sandy = (Contact) context.getBean("addContact3");
+        contactService.save(bob); 
+        contactService.save(patrick); 
+        contactService.save(sandy); 
+        
         List<Group> groups = groupService.getAllGroups();
         List<Contact> contacts = contactService.getAllContacts();
        

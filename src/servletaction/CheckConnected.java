@@ -15,7 +15,6 @@ public class CheckConnected extends Action
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
 	{
 		HttpSession session = pRequest.getSession();
-		System.out.println(session.getAttribute("user"));
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }

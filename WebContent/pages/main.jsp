@@ -46,17 +46,23 @@
   </div>
 </div>
 
-<div class="ui container">	
-	<a style="margin-bottom: 2%;" class="ui labeled icon button" href="ContactCreation.do">
-	  <i class="plus icon"></i>
-	  <bean:message key="form.contact.add.new"/>
-	</a>
-	
-	<a style="margin-bottom: 2%;" class="ui labeled icon button" href="Populate.do">
-	  <i class="plus icon"></i>
-	  Hello darkness my old friend
-	  <i class="plus icon"></i>
-	</a>
+<div class="ui container">
+	<div class="ui grid">
+	  <div class="four column row">
+	    <div class="left floated column">
+	    	<a style="margin-bottom: 2%;" class="ui labeled icon button" href="ContactCreation.do">
+			  <i class="plus icon"></i>
+			  <bean:message key="form.contact.add.new"/>
+			</a>
+	    </div>
+	    <div class="right floated column">
+		    <a style="margin-bottom: 2%;" class="ui labeled icon button" href="Populate.do">
+			  Hello darkness my old friend, i came to populate you again
+			  <i class="plus icon"></i>
+			</a>
+	    </div>
+	  </div>
+	</div>	
 	<table id="contactTable" class="ui celled padded table">
 		<thead>
 			<tr>
@@ -78,7 +84,7 @@
 		</tbody>
 	</table>
 	
-	<logic:iterate name="contacts" id="contacts">
+	<logic:iterate name="contacts" id="contact">
 		<div class="ui modal" id="modal-<bean:write name="contact" property="id"/>">
 			<i class="close icon"></i>
 	  		<div class="header"><bean:message key="main.contact.detail"/></div>
