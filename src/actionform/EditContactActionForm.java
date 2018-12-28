@@ -2,6 +2,7 @@ package actionform;
 
 import domain.*;
 import models.Adresse;
+import models.Company;
 import models.Contact;
 import models.Group;
 import models.PhoneNumber;
@@ -20,8 +21,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EditContactActionForm extends ActionForm
-{
+public class EditContactActionForm extends ActionForm {
 	/**
 	 * 
 	 */
@@ -31,6 +31,10 @@ public class EditContactActionForm extends ActionForm
 	private String firstName = null;
 	private String email = null;
 	private String id = null;
+	
+	/* Company */
+	private String name = null;
+	private String numSiret = null;
 	
 	private String street = null;
 	private String city = null;
@@ -155,43 +159,56 @@ public class EditContactActionForm extends ActionForm
 	public void setPhoneNumber(String[] phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public String getNumSiret() {
+		return numSiret;
+	}
 
-	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request)
-	{
+	public void setNumSiret(String numSiret) {
+		this.numSiret = numSiret;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 		/* Contact */
-		if (this.lastName == null || this.lastName.length() < 1 || this.lastName.length() > 45)
-		{
+		if (this.lastName == null || this.lastName.length() < 1 || this.lastName.length() > 45) {
 			errors.add("lastName", new ActionMessage("form.contact.lastName.error"));
 		}
-		if (this.firstName == null || this.firstName.length() < 1 || this.firstName.length() > 45)
-		{
+		if (this.firstName == null || this.firstName.length() < 1 || this.firstName.length() > 45) {
 			errors.add("firstName", new ActionMessage("form.contact.firstName.error"));
 		}
-		if (this.email == null || this.email.length() < 5 || this.email.length() > 75)
-		{
+		if (this.email == null || this.email.length() < 5 || this.email.length() > 75) {
 			errors.add("email", new ActionMessage("form.contact.email.error"));
 		}
 		/* Adress */
-		if ((this.street != "" && this.street.length() < 1) || this.street.length() > 100)
-		{
+		if ((this.street != "" && this.street.length() < 1) || this.street.length() > 100) {
 			errors.add("street", new ActionMessage("form.contact.street.error.size"));
 		}
-		if ((this.city != "" && this.city.length() < 1) || this.city.length() > 50)
-		{
+		if ((this.city != "" && this.city.length() < 1) || this.city.length() > 50) {
 			errors.add("city", new ActionMessage("form.contact.city.error.size"));
 		}
-		if ((this.zip != "" && this.zip.length() < 5) || this.zip.length() > 10)
-		{
+		if ((this.zip != "" && this.zip.length() < 5) || this.zip.length() > 10) {
 			errors.add("zip", new ActionMessage("form.contact.zip.error.size"));
 		}
-		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50)
-		{
+		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50) {
 			errors.add("country", new ActionMessage("form.contact.country.error.size"));
 		}
+		if (this.numSiret != "" && this.name != "" && this.numSiret.length() != 14) {
+			errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
+		}
+		if (this.name != "" && this.numSiret != "" && (this.name.length() < 1 || this.name.length() > 45)) {
+			errors.add("name", new ActionMessage("form.contact.companyName.error.size"));
+		}
 		
-		if(!errors.isEmpty()) 
-		{	
+		if(!errors.isEmpty()) {	
 			Set<PhoneNumber> phoneNumbers = new HashSet<PhoneNumber>();
 			for (int i=0; i<this.phoneKind.length; i++) {
 				phoneNumbers.add(new PhoneNumber(this.phoneKind[i], this.phoneNumber[i]));
@@ -203,7 +220,12 @@ public class EditContactActionForm extends ActionForm
 			Adresse adresse = new Adresse(this.street, this.city, this.zip, this.country);
 			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse, phoneNumbers, contactGroups);
 			request.setAttribute("listGroups", this.listGroups);
-			request.setAttribute("contact", contact);
+			if (this.name != null && this.numSiret != null) {
+				Company company = new Company(contact, numSiret, name);
+				request.setAttribute("contact", company);
+			} else {
+				request.setAttribute("contact", contact);
+			}
         }
 		return errors;
 	}

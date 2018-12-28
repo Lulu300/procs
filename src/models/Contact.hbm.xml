@@ -4,10 +4,13 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="models">
-	<class name="Contact" table="Contact">
+	<class name="Contact" table="Contact" discriminator-value="contact">
 		<id name="id" type="int" column="id">
 			<generator class="increment"/>
 		</id>
+		
+		<discriminator column="type" type="string"/>
+		
 		<version name="version" column="VERSION"/>
 
 		<property name="firstName" type="string">
@@ -32,5 +35,10 @@
 			<key column="id"/>
 			<many-to-many class="Group" column="idGroup"/>
 		</set>
+		
+		<subclass name="Company" discriminator-value="company">
+			<property name="numSiret" type="string" column="NUM_SIRET"/>
+			<property name="name" type="string" column="NAME"/>
+		</subclass>
 	</class>
 </hibernate-mapping>

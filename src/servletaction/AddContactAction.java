@@ -16,6 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import actionform.AddContactActionForm;
 import models.Adresse;
+import models.Company;
 import models.Contact;
 import models.Group;
 import models.PhoneNumber;
@@ -57,6 +58,10 @@ public class AddContactAction extends Action {
 		
 		final String[] groups = lForm.getGroups();
 		
+		/* Company */
+		final String numSiret = lForm.getNumSiret();
+		final String name = lForm.getName();
+		
 		Set<Group> contactGroups = new HashSet<>();
 		Set<PhoneNumber> phones = new HashSet<>();
 		
@@ -89,8 +94,13 @@ public class AddContactAction extends Action {
 		adresseService.addAdresse(adresse);
 		
 		Contact contact = new Contact(lastName, firstName, email, adresse, phones, contactGroups);
-
-		contactService.saveOrUpdate(contact);
+		
+		if (name != "" && numSiret != "") {
+			Company company = new Company(contact, numSiret, name);
+			contactService.saveOrUpdate(company);
+		} else {
+			contactService.saveOrUpdate(contact);
+		}
 		return pMapping.findForward("success");
 	}
 }

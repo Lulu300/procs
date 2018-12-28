@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import actionform.EditContactActionForm;
 import domain.ContactDAO;
 import models.Adresse;
+import models.Company;
 import models.Contact;
 import models.Group;
 import models.PhoneNumber;
@@ -49,6 +50,10 @@ public class EditContactAction extends Action {
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
 		final int id = Integer.parseInt(lForm.getId());
+		
+		/* Company */
+		final String numSiret = lForm.getNumSiret();
+		final String name = lForm.getName();
 		
 		final String street = lForm.getStreet();
 		final String city = lForm.getCity();
@@ -105,12 +110,23 @@ public class EditContactAction extends Action {
 		contact.setPhoneNumbers(phones);
 		contact.setGroups(contactGroups);
 		
-		try {
-			contactService.merge(contact);
-			return pMapping.findForward("success");
-		} catch (Exception e) {
-			System.out.println(e);
-			return pMapping.findForward("error");
+		if (name != "" && numSiret != "") {
+			Company company = new Company(contact, numSiret, name);
+			try {
+				contactService.merge(company);
+				return pMapping.findForward("success");
+			} catch (Exception e) {
+				System.out.println(e);
+				return pMapping.findForward("error");
+			}
+		} else {
+			try {
+				contactService.merge(contact);
+				return pMapping.findForward("success");
+			} catch (Exception e) {
+				System.out.println(e);
+				return pMapping.findForward("error");
+			}
 		}
 	}
 }

@@ -124,6 +124,15 @@
 							<p><span style="font-weight: bold;"><bean:message key="form.contact.phoneNumber.label"/></span>: <bean:write name="phoneNumber" property="phoneNumber"/></p>
 						</div>
 					</logic:iterate>
+					<div class="sixteen wide column">
+						<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
+					</div>
+					<div class="eight wide column">
+						<p><span style="font-weight: bold;"><bean:message key="form.contact.numSiret.label"/></span>: <bean:write name="contact" property="numSiret"/></p>
+					</div>
+					<div class="eight wide column">
+						<p><span style="font-weight: bold;"><bean:message key="form.contact.companyName.label"/></span>: <bean:write name="contact" property="name"/></p>
+					</div>
 				</div>
 	  		</div>
 		</div>

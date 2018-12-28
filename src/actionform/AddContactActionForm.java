@@ -25,6 +25,10 @@ public class AddContactActionForm extends ActionForm
 	private String firstName = null;
 	private String email = null;
 	
+	/* Company */
+	private String name = null;
+	private String numSiret = null;
+	
 	private String street = null;
 	private String city = null;
 	private String zip = null;
@@ -138,34 +142,44 @@ public class AddContactActionForm extends ActionForm
 		this.country = country;
 	}
 
-	public String getLastName() 
-	{
+	public String getLastName() {
 		return lastName;
 	}
 	
-	public void setLastName(String lastName) 
-	{
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	
-	public String getFirstName() 
-	{
+	public String getFirstName() {
 		return firstName;
 	}
 	
-	public void setFirstName(String firstName) 
-	{
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	
-	public String getEmail() 
-	{
+	public String getEmail() {
 		return email;
 	}
 	
-	public void setEmail(String email) 
-	{
+	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getNumSiret() {
+		return numSiret;
+	}
+
+	public void setNumSiret(String numSiret) {
+		this.numSiret = numSiret;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request)
@@ -228,6 +242,14 @@ public class AddContactActionForm extends ActionForm
 		if ((this.phoneNumber3 != "" && this.phoneNumber3.length() < 10) || this.phoneNumber3.length() > 15)
 		{
 			errors.add("phoneNumber3", new ActionMessage("form.contact.phoneNumber.error.size"));
+		}
+		
+		/* Company */
+		if (this.numSiret != "" && this.name != "" && this.numSiret.length() != 14) {
+			errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
+		}
+		if (this.name != "" && this.numSiret != "" && (this.name.length() < 1 || this.name.length() > 45)) {
+			errors.add("companyName", new ActionMessage("form.contact.companyName.error.size"));
 		}
 		
 		if (!errors.isEmpty()) {

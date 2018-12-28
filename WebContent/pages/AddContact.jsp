@@ -155,6 +155,17 @@
    				<p><html:errors property="groups"/></p>
 			</div>
 		</div>
+		<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
+		<div class="two fields">
+			<div class="field">
+				<label for="numSiret">Num Siret de l'entreprise</label>
+				<html:text property="numSiret" size="14" maxlength="14"/>
+			</div>
+			<div class="field">
+				<label for="name">Nom de l'entreprise</label>
+				<html:text property="name" size="50" maxlength="50"/>
+			</div>
+		</div>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.add"/></html:submit>
    </html:form> 
 </div>
