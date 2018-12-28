@@ -18,9 +18,6 @@ public class GroupDAO extends DAO {
 		super.beginTransaction();
 		try {
 			contacts = super.getSession().createQuery("from Group group").list();
-			for(Group c : contacts) {
-				System.out.println(c);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -27,7 +27,6 @@ public class Adresse {
 	}
 	
 	public Adresse(String street, String city, String zip, String country) {
-		this.id = -1;
 		this.street = street;
 		this.city = city;
 		this.zip = zip;

@@ -29,7 +29,6 @@ public class InfoContactEditionForm extends Action {
         }
         
 		String s_id = (String) pRequest.getParameter("cid");
-		System.out.println(s_id);
 		try {
 			int id = Integer.parseInt(s_id);
 			ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");

@@ -38,4 +38,8 @@ public class ContactService {
 		this.contactDAO.merge(contact);
 	}
 	
+	public void save(Contact contact) {
+		this.contactDAO.save(contact);
+	}
+	
 }

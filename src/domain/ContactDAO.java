@@ -82,4 +82,15 @@ public class ContactDAO extends DAO
 			super.endTransaction();
 		}
 	}
+	
+	public void save(Contact contact) {
+		super.beginTransaction();
+		try {
+			super.getSession().save(contact);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.endTransaction();
+		}
+	}
 }

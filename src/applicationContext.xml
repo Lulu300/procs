@@ -32,35 +32,106 @@
 	</bean>
 	
 	<bean id="FamilyGroup" class="models.Group">
-		<property name="id" value="1" />
-		<property name="name" value="Family" />
+		<constructor-arg type="String" value="Family" />
 	</bean>
 	<bean id="WorkGroup" class="models.Group">
-		<property name="id" value="2" />
-		<property name="name" value="Work" />
+		<constructor-arg type="String" value="Work" />
 	</bean>
 	<bean id="FriendsGroup" class="models.Group">
-		<property name="id" value="3" />
-		<property name="name" value="Friends" />
+		<constructor-arg type="String" value="Friends" />
 	</bean>
-	<!--
-	<bean id="addContact1" class="models.Contact">
-		<property name="id" />
-		<property name="lastName" />
-		<property name="firstName" />
-		<property name="email" />
-		<property name="adresse" ref="Adresse1" />
-		<property name="phoneNumbers">
+
+	<bean id="adresse1" class="models.Adresse">
+		<constructor-arg type="String" value="3751 Washington Street"/>
+		<constructor-arg type="String" value="Falfurrias"/>
+		<constructor-arg type="String" value="78355"/>
+		<constructor-arg type="String" value="USA"/>
+	</bean>
+	
+	<bean id="adresse2" class="models.Adresse">
+		<property name="street" value="3993 Thomas Street"/>
+		<property name="city" value="Schaumburg"/>
+		<property name="zip" value="60173"/>
+		<property name="country" value="USA"/>
+	</bean>
+	
+	<bean id="adresse3" class="models.Adresse">
+		<property name="street" value="3665 Lighthouse Drive"/>
+		<property name="city" value="Springfield"/>
+		<property name="zip" value="65802"/>
+		<property name="country" value="USA"/>
+	</bean>
+	
+	<bean id="phoneNumber1Contact1" class="models.PhoneNumber">
+		<constructor-arg type="String" value="+1" />
+		<constructor-arg type="String" value="361-325-0194" />
+		<property name="contact" ref="addContact1" />
+	</bean>
+	
+	<bean id="phoneNumber1Contact2" class="models.PhoneNumber">
+		<property name="phoneKind" value="+1" />
+		<property name="phoneNumber" value="361-325-0194" />
+		<property name="contact" ref="addContact2" />
+	</bean>
+	
+	<bean id="phoneNumber1Contact3" class="models.PhoneNumber">
+		<property name="phoneKind" value="+1" />
+		<property name="phoneNumber" value="417-240-5445" />
+		<property name="contact" ref="addContact3" />
+	</bean>
+	
+	<bean id="phoneNumber2Contact3" class="models.PhoneNumber">
+		<property name="phoneKind" value="+1" />
+		<property name="phoneNumber" value="417-834-8333" />
+		<property name="contact" ref="addContact3" />
+	</bean>
+	
+	<bean id="addContact1" class="models.Contact" autowire="constructor">
+		<constructor-arg type="String" value="Sponge"/>
+		<constructor-arg type="String" value="Bob"/>
+		<constructor-arg type="String" value="spongebob@ocean.com"/>
+		<constructor-arg ref="adresse1"/>
+		<constructor-arg>  
 			<set>
 				<ref bean="phoneNumber1Contact1" />
-				<ref bean="phoneNumber2Contact1" />
+			</set>
+		</constructor-arg>
+		<constructor-arg>  
+			<set>
+				<ref bean="WorkGroup" />
+				<ref bean="FriendsGroup" />
+			</set>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="addContact2" class="models.Contact" autowire="constructor">
+		<property name="lastName" value="Star"/>
+		<property name="firstName" value="Patrick"/>
+		<property name="email" value="starpatrick@ocean.com"/>
+		<property name="adresse" ref="adresse2"/>
+		<property name="phoneNumbers">  
+			<set>
+				<ref bean="phoneNumber1Contact2" />
 			</set>
 		</property>
-		<property name="groups"> 
-			<set>
-				<ref bean="group1" />
-			</set>
+		<property name="groups">
+			<null />
 		</property>
 	</bean>
-	-->
+	
+	<bean id="addContact3" class="models.Contact" autowire="constructor">
+		<property name="lastName" value="Squirrel"/>
+		<property name="firstName" value="Sandy"/>
+		<property name="email" value="squirrelsandy@ocean.com"/>
+		<property name="adresse" ref="adresse3"/>
+		<property name="phoneNumbers">  
+			<set>
+				<ref bean="phoneNumber1Contact3" />
+				<ref bean="phoneNumber2Contact3" />
+			</set>
+		</property>
+		<property name="groups">
+			<null />
+		</property>
+	</bean>
 </beans>

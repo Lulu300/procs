@@ -14,6 +14,12 @@ public class PhoneNumber {
 		this.phoneNumber = phoneNumber;
 	}
 	
+	public PhoneNumber(String phoneKind, String phoneNumber, Contact contact) {
+		this.phoneKind = phoneKind;
+		this.phoneNumber = phoneNumber;
+		this.contact = contact;
+	}
+	
 	public Contact getContact() {
 		return contact;
 	}
