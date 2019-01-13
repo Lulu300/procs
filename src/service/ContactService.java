@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import domain.ContactDAO;
+import models.Company;
 import models.Contact;
 
 public class ContactService {
@@ -22,11 +23,11 @@ public class ContactService {
 		return this.contactDAO.saveOrUpdateContact(contact);
 	}
 	
-	public List<Contact> getAllContacts() {
+	public List<Company> getAllContacts() {
 		return this.contactDAO.getAllContacts();
 	}
 	
-	public Contact getContact(int id) {
+	public Company getContact(int id) {
 		return this.contactDAO.getContact(id);
 	}
 	

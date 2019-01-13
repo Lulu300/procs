@@ -109,7 +109,14 @@ public class EditContactAction extends Action {
 		contact.setAdresse(adresse);
 		contact.setPhoneNumbers(phones);
 		contact.setGroups(contactGroups);
+
+		System.out.println(name);
+		System.out.println(name.length());
+		System.out.println(name != "");
 		
+		System.out.println(numSiret);
+		System.out.println(numSiret.length());
+		System.out.println(numSiret != "");
 		if (name != "" && numSiret != "") {
 			Company company = new Company(contact, numSiret, name);
 			try {
@@ -121,6 +128,7 @@ public class EditContactAction extends Action {
 			}
 		} else {
 			try {
+				System.out.println(contact);
 				contactService.merge(contact);
 				return pMapping.findForward("success");
 			} catch (Exception e) {

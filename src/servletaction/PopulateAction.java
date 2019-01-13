@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import models.Company;
 import models.Contact;
 import models.Group;
 import service.ContactService;
@@ -47,7 +48,7 @@ public class PopulateAction extends Action
         contactService.save(sandy); 
         
         List<Group> groups = groupService.getAllGroups();
-        List<Contact> contacts = contactService.getAllContacts();
+        List<Company> contacts = contactService.getAllContacts();
        
 		pRequest.setAttribute("contacts", contacts);
         pRequest.setAttribute("listGroups", groups);

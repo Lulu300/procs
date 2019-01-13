@@ -1,11 +1,13 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
 
 import domain.DAO;
+import models.Company;
 import models.Contact;
 
 
@@ -30,11 +32,15 @@ public class ContactDAO extends DAO
 		return res;
 	}
 	
-	public Contact getContact(int id) {
-		Contact contact = null;
+	public Company getContact(int id) {
+		Company contact = null;
 		super.beginTransaction();
 		try {
-			contact = (Contact) super.getSession().get(Contact.class, id);
+			contact = (Company) super.getSession().get(Company.class, id);
+			if (contact == null) {
+				Contact c = (Contact) super.getSession().get(Contact.class, id);
+				contact = new Company(c, null, null);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -58,12 +64,21 @@ public class ContactDAO extends DAO
 		return res;
 	}
 	
-	public List<Contact> getAllContacts() {
-		List<Contact> contacts = new ArrayList<Contact>();
+	public List<Company> getAllContacts() {
+		List<Company> contacts = new ArrayList<Company>();
 		
 		super.beginTransaction();
 		try {
-			contacts = super.getSession().createQuery("select distinct contact from Contact contact left join fetch contact.phoneNumbers phone").list();
+			List res = super.getSession().createQuery("select distinct contact from Contact contact left join fetch contact.phoneNumbers phone").list();
+			for (int i=0; i < res.size(); i++) {
+				Company c;
+				if (res.get(i).getClass().getName().equals("models.Contact")) {
+					c = new Company((Contact) res.get(i), null, null);
+				} else {
+					c = (Company) res.get(i);
+				}
+				contacts.add(c);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -87,6 +102,17 @@ public class ContactDAO extends DAO
 		super.beginTransaction();
 		try {
 			super.getSession().save(contact);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.endTransaction();
+		}
+	}
+	
+	public void save(Company company) {
+		super.beginTransaction();
+		try {
+			super.getSession().save(company);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

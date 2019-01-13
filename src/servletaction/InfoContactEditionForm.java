@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import models.Company;
 import models.Contact;
 import models.Group;
 import models.PhoneNumber;
@@ -35,8 +36,10 @@ public class InfoContactEditionForm extends Action {
 	        final ContactService contactService = (ContactService) context.getBean("contactService");
 	        final GroupService groupService = (GroupService) context.getBean("groupService");
 	        
-			Contact contact = contactService.getContact(id);
+			Company contact = contactService.getContact(id);
 			List<Group> listGroups = groupService.getAllGroups();
+			
+			System.out.println(contact);
 			
 			Set<PhoneNumber> phones = contact.getPhoneNumbers();
 			if (phones.size() == 2) {

@@ -46,7 +46,9 @@ public class Company extends Contact {
 
 	@Override
 	public String toString() {
-		return "Company [numSiret=" + numSiret + ", name=" + name + "]";
+		return "Company [numSiret=" + numSiret + ", name=" + name + ", id=" + id + ", lastName=" + lastName
+				+ ", firstName=" + firstName + ", email=" + email + ", adresse=" + adresse + ", phoneNumbers="
+				+ phoneNumbers + ", groups=" + groups + "]";
 	}
 
 }

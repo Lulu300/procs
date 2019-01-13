@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import models.Company;
 import models.Contact;
 import models.Group;
 
@@ -28,7 +29,11 @@ public class ListContactAction extends Action {
         }
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         final ContactService contactService = (ContactService) context.getBean("contactService");
-        List<Contact> contacts = contactService.getAllContacts();
+        List<Company> contacts = contactService.getAllContacts();
+        
+        for (int i=0; i < contacts.size(); i++) {
+        	System.out.println(contacts.get(i));
+        }
        
 		pRequest.setAttribute("contacts", contacts);
 		

@@ -97,9 +97,9 @@ public class AddContactAction extends Action {
 		
 		if (name != "" && numSiret != "") {
 			Company company = new Company(contact, numSiret, name);
-			contactService.saveOrUpdate(company);
+			contactService.save(company);
 		} else {
-			contactService.saveOrUpdate(contact);
+			contactService.save(contact);
 		}
 		return pMapping.findForward("success");
 	}
