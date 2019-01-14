@@ -13,21 +13,19 @@ import org.apache.struts.action.ActionMapping;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import models.Company;
 import models.Contact;
 import models.Group;
 import service.ContactService;
 import service.GroupService;
 
-public class PopulateAction extends Action 
-{
-	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
-	{
-		
+public class PopulateAction extends Action {
+	
+	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {	
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }
+        
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");  
         final GroupService groupService = (GroupService) context.getBean("groupService");
         final ContactService contactService = (ContactService) context.getBean("contactService");
@@ -43,15 +41,18 @@ public class PopulateAction extends Action
         Contact bob = (Contact) context.getBean("addContact1");
         Contact patrick = (Contact) context.getBean("addContact2");
         Contact sandy = (Contact) context.getBean("addContact3");
+        
         contactService.save(bob); 
         contactService.save(patrick); 
         contactService.save(sandy); 
         
         List<Group> groups = groupService.getAllGroups();
-        List<Company> contacts = contactService.getAllContacts();
+        List<Contact> contacts = contactService.getAllContacts();
        
 		pRequest.setAttribute("contacts", contacts);
         pRequest.setAttribute("listGroups", groups);
+        
 		return pMapping.findForward("listContacts");
 	}
+
 }

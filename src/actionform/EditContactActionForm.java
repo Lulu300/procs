@@ -1,6 +1,5 @@
 package actionform;
 
-import domain.*;
 import models.Adresse;
 import models.Company;
 import models.Contact;
@@ -22,29 +21,26 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 public class EditContactActionForm extends ActionForm {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	/* Contact */
 	private String lastName = null;
 	private String firstName = null;
 	private String email = null;
 	private String id = null;
-	
 	/* Company */
 	private String name = null;
 	private String numSiret = null;
-	
+	/* Adresse */
 	private String street = null;
 	private String city = null;
 	private String zip = null;
 	private String country = null;
-	
+	/* PhoneNumber */
 	private String[] phoneKind = null;
 	private String[] phoneNumber = null;
 	private String[] idPhone = null;
-	
+	/* Group */
 	private List<Group> listGroups;
 	private String[] groups;
 	
@@ -55,6 +51,7 @@ public class EditContactActionForm extends ActionForm {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		groupService = (GroupService) context.getBean("groupService");
+		
 		this.listGroups = groupService.getAllGroups();
 	}
 	
@@ -114,33 +111,27 @@ public class EditContactActionForm extends ActionForm {
 		this.id = id;
 	}
 
-	public String getLastName() 
-	{
+	public String getLastName() {
 		return lastName;
 	}
 	
-	public void setLastName(String lastName) 
-	{
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	
-	public String getFirstName() 
-	{
+	public String getFirstName() {
 		return firstName;
 	}
 	
-	public void setFirstName(String firstName) 
-	{
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	
-	public String getEmail() 
-	{
+	public String getEmail() {
 		return email;
 	}
 	
-	public void setEmail(String email) 
-	{
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	
@@ -201,12 +192,12 @@ public class EditContactActionForm extends ActionForm {
 		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50) {
 			errors.add("country", new ActionMessage("form.contact.country.error.size"));
 		}
-		
+		/* Company */
 		if (this.numSiret != null && this.numSiret != null) {
-			if (this.numSiret != "" && this.name != "" && this.numSiret.length() != 14) {
+			if (this.numSiret != "" && this.name != "" || this.numSiret.length() != 14) {
 				errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
 			}
-			if (this.name != "" && this.numSiret != "" && (this.name.length() < 1 || this.name.length() > 45)) {
+			if (this.name != "" && this.numSiret != "" || (this.name.length() < 1 || this.name.length() > 45)) {
 				errors.add("name", new ActionMessage("form.contact.companyName.error.size"));
 			}
 		}
@@ -216,12 +207,15 @@ public class EditContactActionForm extends ActionForm {
 			for (int i=0; i<this.phoneKind.length; i++) {
 				phoneNumbers.add(new PhoneNumber(this.phoneKind[i], this.phoneNumber[i]));
 			}
+			
 			Set<Group> contactGroups = new HashSet<Group>();
 			for (String idGroup : this.groups) {
 				contactGroups.add(groupService.getGroup(Integer.parseInt(idGroup)));
 			}
+			
 			Adresse adresse = new Adresse(this.street, this.city, this.zip, this.country);
 			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse, phoneNumbers, contactGroups);
+			
 			request.setAttribute("listGroups", this.listGroups);
 			if (this.name != null && this.numSiret != null) {
 				Company company = new Company(contact, numSiret, name);
@@ -230,6 +224,8 @@ public class EditContactActionForm extends ActionForm {
 				request.setAttribute("contact", contact);
 			}
         }
+		
 		return errors;
 	}
+	
 }

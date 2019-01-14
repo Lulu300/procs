@@ -14,43 +14,40 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class AddContactActionForm extends ActionForm
-{
-	/**
-	 * 
-	 */
+public class AddContactActionForm extends ActionForm {
+	
 	private static final long serialVersionUID = 1L;
 	/* Contact */
 	private String lastName = null;
 	private String firstName = null;
 	private String email = null;
-	
 	/* Company */
 	private String name = null;
 	private String numSiret = null;
-	
+	/* Adresse */
 	private String street = null;
 	private String city = null;
 	private String zip = null;
 	private String country = null;
-	
+	/* PhoneNumbers */
 	private String phoneKind1 = null;
-	private String phoneNumber1 = null;
-	
 	private String phoneKind2 = null;
-	private String phoneNumber2 = null;
-	
 	private String phoneKind3 = null;
+	private String phoneNumber1 = null;
+	private String phoneNumber2 = null;
 	private String phoneNumber3 = null;
-	
+	/* Groups */
 	private List<Group> listGroups;
 	private String[] groups;
+	/* Service */
+	final GroupService groupService;
 	
 	public AddContactActionForm() {
 		super();
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		final GroupService groupService = (GroupService) context.getBean("groupService");
+		groupService = (GroupService) context.getBean("groupService");
+		
 		this.listGroups = groupService.getAllGroups();
 	}
 
@@ -198,8 +195,7 @@ public class AddContactActionForm extends ActionForm
 		{
 			errors.add("email", new ActionMessage("form.contact.email.error"));
 		}
-		
-		/* Adress */
+		/* Adresse */
 		if ((this.street != "" && this.street.length() < 1) || this.street.length() > 100)
 		{
 			errors.add("street", new ActionMessage("form.contact.street.error.size"));
@@ -225,7 +221,6 @@ public class AddContactActionForm extends ActionForm
 		{
 			errors.add("phoneNumber1", new ActionMessage("form.contact.phoneNumber.error.size"));
 		}
-		
 		if ((this.phoneKind2 != "" && this.phoneKind2.length() < 3) || this.phoneKind2.length() > 10)
 		{
 			errors.add("phoneKind2", new ActionMessage("form.contact.phoneKind.error.size"));
@@ -234,7 +229,6 @@ public class AddContactActionForm extends ActionForm
 		{
 			errors.add("phoneNumber2", new ActionMessage("form.contact.phoneNumber.error.size"));
 		}
-		
 		if ((this.phoneKind3 != "" && this.phoneKind3.length() < 3) || this.phoneKind3.length() > 10)
 		{
 			errors.add("phoneKind3", new ActionMessage("form.contact.phoneKind.error.size"));
@@ -243,7 +237,6 @@ public class AddContactActionForm extends ActionForm
 		{
 			errors.add("phoneNumber3", new ActionMessage("form.contact.phoneNumber.error.size"));
 		}
-		
 		/* Company */
 		if (this.numSiret != "" && this.name != "" && this.numSiret.length() != 14) {
 			errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
@@ -258,4 +251,5 @@ public class AddContactActionForm extends ActionForm
 		
 		return errors;
 	}
+	
 }

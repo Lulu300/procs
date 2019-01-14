@@ -1,6 +1,7 @@
 package models;
 
 public class Adresse {
+	
 	public int id;
 	public String street;
 	public String city;
@@ -80,4 +81,11 @@ public class Adresse {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
+	@Override
+	public String toString() {
+		return "Adresse [id=" + id + ", street=" + street + ", city=" + city + ", zip=" + zip + ", country=" + country
+				+ "]";
+	}
+	
 }

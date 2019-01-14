@@ -16,21 +16,22 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import models.Group;
 import service.GroupService;
 
-public class InfoContactForm extends Action 
-{
-	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
-	{
-		
+public class InfoContactForm extends Action {
+	
+	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
         }
+        
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");  
         final GroupService groupService = (GroupService) context.getBean("groupService");
+        
         List<Group> groups = groupService.getAllGroups();
 
         pRequest.setAttribute("listGroups", groups);
 		
 		return pMapping.findForward("addContact");
 	}
+	
 }

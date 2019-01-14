@@ -1,8 +1,7 @@
 package models;
 
-import java.util.Set;
-
 public class Group {
+	
 	public int id;
 	public String name;
 	private int version;
@@ -46,6 +45,10 @@ public class Group {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", name=" + name + "]";
+	}
 	
 }

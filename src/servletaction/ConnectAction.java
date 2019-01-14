@@ -11,10 +11,9 @@ import org.apache.struts.action.ActionMapping;
 
 import actionform.ConnectionActionForm;
 
-public class ConnectAction extends Action 
-{
-	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse)
-	{
+public class ConnectAction extends Action {
+	
+	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		final ConnectionActionForm lForm = (ConnectionActionForm) pForm;
 		
 		final String username = lForm.getUsername();
@@ -24,11 +23,13 @@ public class ConnectAction extends Action
 			pRequest.setAttribute("username", username);
 			return pMapping.findForward("error");
 		}
+		
 		HttpSession session = pRequest.getSession();
-
         if(session.getAttribute("user") == null) {
         	session.setAttribute("user", username);
         }
+        
         return pMapping.findForward("success");
 	}
+	
 }

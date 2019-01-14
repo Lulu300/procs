@@ -119,7 +119,7 @@
 		</property>
 	</bean>
 	
-	<bean id="addContact3" class="models.Contact" autowire="constructor">
+	<bean id="addContact3" class="models.Company" autowire="constructor">
 		<property name="lastName" value="Squirrel"/>
 		<property name="firstName" value="Sandy"/>
 		<property name="email" value="squirrelsandy@ocean.com"/>
@@ -133,5 +133,7 @@
 		<property name="groups">
 			<null />
 		</property>
+		<property name="name" value="Bikini Bottom" />
+		<property name="numSiret" value="12345678901234" />
 	</bean>
 </beans>

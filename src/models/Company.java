@@ -9,8 +9,6 @@ public class Company extends Contact {
 	
 	public Company() {}
 	
-	
-	
 	public Company(Contact contact, String numSiret, String name) {
 		super(contact.id, contact.lastName, contact.firstName, contact.email, contact.adresse, contact.phoneNumbers, contact.groups);
 		this.numSiret = numSiret;
@@ -22,6 +20,7 @@ public class Company extends Contact {
 		this.numSiret = numSiret;
 		this.name = name;
 	}
+	
 	public Company(int id, String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers, Set<Group> groups, String numSiret, String name) {
 		super(id, lastName, firstName, email, adresse, phoneNumbers, groups);
 		this.numSiret = numSiret;

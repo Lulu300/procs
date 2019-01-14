@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionform.EditContactActionForm;
-import domain.ContactDAO;
 import models.Adresse;
 import models.Company;
 import models.Contact;
@@ -23,14 +22,11 @@ import service.AdresseService;
 import service.ContactService;
 import service.GroupService;
 import service.PhoneService;
-import util.HibernateUtil;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class EditContactAction extends Action {
+	
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
@@ -44,27 +40,25 @@ public class EditContactAction extends Action {
         final GroupService groupService = (GroupService) context.getBean("groupService");
         
 		final EditContactActionForm lForm = (EditContactActionForm) pForm;
-		
 		/* Contact */
 		final String firstName = lForm.getFirstName();
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
 		final int id = Integer.parseInt(lForm.getId());
-		
 		/* Company */
 		final String numSiret = lForm.getNumSiret();
 		final String name = lForm.getName();
-		
+		/* Adresse */
 		final String street = lForm.getStreet();
 		final String city = lForm.getCity();
 		final String zip = lForm.getZip();
 		final String country = lForm.getCountry();
 		final int idA = Integer.parseInt(lForm.getId());
-		
+		/* PhoneNumbers */
 		final String[] idPhone = lForm.getIdPhone();
 		final String[] phoneKind = lForm.getPhoneKind();
 		final String[] phoneNumber = lForm.getPhoneNumber();
-		
+		/* Groups */
 		final String[] groups = lForm.getGroups();
 		
 		Set<PhoneNumber> phones = new HashSet<>();
@@ -96,9 +90,7 @@ public class EditContactAction extends Action {
 		}
 		
 		Contact contact = contactService.getContact(id);
-		
-		System.out.println(name);
-		System.out.println(numSiret);
+
 		if (name != null && numSiret != null) {
 			((Company) contact).setName(name);
 			((Company) contact).setNumSiret(numSiret);
@@ -126,4 +118,5 @@ public class EditContactAction extends Action {
 			return pMapping.findForward("error");
 		}
 	}
+	
 }

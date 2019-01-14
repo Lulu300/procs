@@ -4,25 +4,32 @@ import domain.DAO;
 import models.PhoneNumber;
 
 
-public class PhoneDAO extends DAO 
-{   
+public class PhoneDAO extends DAO {
+	
     public PhoneDAO() {
         super();
     }
     
-    public void save(PhoneNumber phoneNumber) {
+    public boolean save(PhoneNumber phoneNumber) {
+    	boolean success;
+    	
+    	super.beginTransaction();
 		try {
-			super.beginTransaction();
 			super.getSession().save(phoneNumber);
+			success = true;
 		} catch (Exception e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			super.endTransaction();
 		}
+		
+		return success;
 	}
     
     public PhoneNumber getPhoneNumber(int id) {
     	PhoneNumber adresse = null;
+    	
 		super.beginTransaction();
 		try {
 			adresse = (PhoneNumber) super.getSession().get(PhoneNumber.class, id);
@@ -31,7 +38,8 @@ public class PhoneDAO extends DAO
 		} finally {
 			super.endTransaction();
 		}
-		return adresse;
 		
+		return adresse;
 	}
+    
 }

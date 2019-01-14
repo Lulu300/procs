@@ -7,15 +7,13 @@ import org.apache.struts.action.ActionMessage;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ConnectionActionForm extends ActionForm 
-{
+public class ConnectionActionForm extends ActionForm {
 
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	
-	public ConnectionActionForm() 
-	{
+	public ConnectionActionForm() {
 		super();
 	}
 
@@ -35,24 +33,22 @@ public class ConnectionActionForm extends ActionForm
 		this.password = password;
 	}
 	
-	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request)
-	{
+	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 
 		if (this.username.length() < 1 || this.username.length() > 45)
 		{
 			errors.add("username", new ActionMessage("form.connection.username.error"));
 		}
-		
 		if (this.password.length() < 1 || this.password.length() > 45)
 		{
 			errors.add("password", new ActionMessage("form.connection.password.error"));
 		}
-		
 		if (!this.username.equals(this.password))
 		{
 			errors.add("password", new ActionMessage("form.connection.username.password.error"));
 		}
+		
 		return errors;
 	}
 	

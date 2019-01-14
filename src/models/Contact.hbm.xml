@@ -8,9 +8,7 @@
 		<id name="id" type="int" column="id">
 			<generator class="increment"/>
 		</id>
-		
 		<discriminator column="type" type="string"/>
-		
 		<version name="version" column="VERSION"/>
 
 		<property name="firstName" type="string">

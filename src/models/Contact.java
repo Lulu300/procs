@@ -3,6 +3,7 @@ package models;
 import java.util.Set;
 
 public class Contact {
+	
 	public int id;
 	public String lastName;
 	public String firstName;
@@ -22,6 +23,7 @@ public class Contact {
 		this.phoneNumbers = phoneNumbers;
 		this.groups = groups;
 	}
+	
 	public Contact(int id, String lastName, String firstName, String email, Adresse adresse, Set<PhoneNumber> phoneNumbers, Set<Group> groups) {
 		this.id = id;
 		this.lastName = lastName;
@@ -100,4 +102,5 @@ public class Contact {
 	public String toString() {
 		return "Contact [id=" + this.id + ", lastName=" + lastName + ", firstName=" + firstName + ", email=" + email + "]";
 	}
+	
 }

@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Contact;
 import models.Group;
 
 public class GroupDAO extends DAO {
@@ -23,11 +22,13 @@ public class GroupDAO extends DAO {
 		} finally {
 			super.endTransaction();
 		}
+		
 		return contacts;
 	}
 	
 	public Group getGroup(int id) {
 		Group group = null;
+		
 		super.beginTransaction();
 		try {
 			group = (Group) super.getSession().get(Group.class, id);
@@ -36,17 +37,25 @@ public class GroupDAO extends DAO {
 		} finally {
 			super.endTransaction();
 		}
+		
 		return group;	
 	}
 	
-	public void addGroup(Group group) {
+	public boolean addGroup(Group group) {
+		boolean success;
+		
 		super.beginTransaction();
 		try {
 			super.getSession().save(group);
+			success = true;
 		} catch (Exception e) {
+			success = false;
 			e.printStackTrace();
 		} finally {
 			super.endTransaction();
 		}
+		
+		return success;
 	}
+	
 }

@@ -1,13 +1,14 @@
 package models;
 
 public class PhoneNumber {
+	
 	public int id;
 	private int version;
 	public String phoneKind;
 	public String phoneNumber;
 	public Contact contact;
 
-	public PhoneNumber() { }
+	public PhoneNumber() {}
 
 	public PhoneNumber(String phoneKind, String phoneNumber) {
 		this.phoneKind = phoneKind;
@@ -59,4 +60,10 @@ public class PhoneNumber {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "PhoneNumber [id=" + id + ", phoneKind=" + phoneKind + ", phoneNumber=" + phoneNumber + "]";
+	}
+	
 }

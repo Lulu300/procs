@@ -6,6 +6,7 @@ import domain.GroupDAO;
 import models.Group;
 
 public class GroupService {
+	
 	private GroupDAO groupDAO;
 	
 	public GroupService() {	}
@@ -22,8 +23,8 @@ public class GroupService {
 		return this.groupDAO.getGroup(id);
 	}
 	
-	public void addGroup(Group group) {
-		this.groupDAO.addGroup(group);
+	public boolean addGroup(Group group) {
+		return this.groupDAO.addGroup(group);
 	}
 
 }

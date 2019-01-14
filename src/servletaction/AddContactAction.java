@@ -25,8 +25,8 @@ import service.ContactService;
 import service.GroupService;
 
 public class AddContactAction extends Action {
+	
 	public ActionForward execute(final ActionMapping pMapping, ActionForm pForm, final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
-		
 		HttpSession session = pRequest.getSession();
         if(session.getAttribute("user") == null) {
             return pMapping.findForward("connection");
@@ -38,48 +38,43 @@ public class AddContactAction extends Action {
         final GroupService groupService = (GroupService) context.getBean("groupService");
         		
 		final AddContactActionForm lForm = (AddContactActionForm) pForm;
-		
 		/* Contact */
 		final String firstName = lForm.getFirstName();
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
-		
+		/* Adresse */
 		final String street = lForm.getStreet();
 		final String city = lForm.getCity();
 		final String zip = lForm.getZip();
 		final String country = lForm.getCountry();
-		
+		/* PhoneNumbers */
 		final String phoneKind1 = lForm.getPhoneKind1();
-		final String phoneNumber1 = lForm.getPhoneNumber1();
 		final String phoneKind2 = lForm.getPhoneKind2();
-		final String phoneNumber2 = lForm.getPhoneNumber2();
 		final String phoneKind3 = lForm.getPhoneKind3();
+		final String phoneNumber1 = lForm.getPhoneNumber1();
+		final String phoneNumber2 = lForm.getPhoneNumber2();
 		final String phoneNumber3 = lForm.getPhoneNumber3();
-		
+		/* Groups */
 		final String[] groups = lForm.getGroups();
-		
 		/* Company */
 		final String numSiret = lForm.getNumSiret();
 		final String name = lForm.getName();
 		
-		Set<Group> contactGroups = new HashSet<>();
 		Set<PhoneNumber> phones = new HashSet<>();
-		
 		if (phoneKind1 != "" && phoneNumber1 != "") {
 			PhoneNumber phone1 = new PhoneNumber(phoneKind1, phoneNumber1);
 			phones.add(phone1);
 		}
-		
 		if (phoneKind2 != "" && phoneNumber2 != "") {
 			PhoneNumber phone2 = new PhoneNumber(phoneKind2, phoneNumber2);
 			phones.add(phone2);
 		}
-		
 		if (phoneKind3 != "" && phoneNumber3 != "") {
 			PhoneNumber phone3 = new PhoneNumber(phoneKind3, phoneNumber3);
 			phones.add(phone3);
 		}
 		
+		Set<Group> contactGroups = new HashSet<>();
 		if (groups != null) {
 			for (String group : groups) {
 				try {
@@ -101,6 +96,8 @@ public class AddContactAction extends Action {
 		} else {
 			contactService.save(contact);
 		}
+		
 		return pMapping.findForward("success");
 	}
+	
 }

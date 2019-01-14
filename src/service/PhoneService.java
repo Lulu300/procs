@@ -13,11 +13,12 @@ public class PhoneService {
 		this.phoneDAO = phoneDAO;
 	}
 	
-	public void addPhoneNumber(PhoneNumber phoneNumber) {
-		this.phoneDAO.save(phoneNumber);
+	public boolean addPhoneNumber(PhoneNumber phoneNumber) {
+		return this.phoneDAO.save(phoneNumber);
 	}
 	
 	public PhoneNumber getPhoneNumber(int id) {
 		return this.phoneDAO.getPhoneNumber(id);
 	}
+	
 }

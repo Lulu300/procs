@@ -2,11 +2,7 @@ package service;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import domain.ContactDAO;
-import models.Company;
 import models.Contact;
 
 public class ContactService {
@@ -19,11 +15,7 @@ public class ContactService {
 		this.contactDAO = contactDAO;
 	}
 	
-	public String saveOrUpdate(Contact contact) {
-		return this.contactDAO.saveOrUpdateContact(contact);
-	}
-	
-	public List<Company> getAllContacts() {
+	public List<Contact> getAllContacts() {
 		return this.contactDAO.getAllContacts();
 	}
 	
@@ -31,16 +23,16 @@ public class ContactService {
 		return this.contactDAO.getContact(id);
 	}
 	
-	public String removeContact(Contact contact) {
+	public boolean removeContact(Contact contact) {
 		return this.contactDAO.removeContact(contact);
 	}
 	
-	public void merge(Contact contact) {
-		this.contactDAO.merge(contact);
+	public boolean merge(Contact contact) {
+		return this.contactDAO.merge(contact);
 	}
 	
-	public void save(Contact contact) {
-		this.contactDAO.save(contact);
+	public boolean save(Contact contact) {
+		return this.contactDAO.save(contact);
 	}
 	
 }
