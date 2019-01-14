@@ -4,6 +4,8 @@
     <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
     <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
     <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+    <%@page import="models.Company" %>
+	<%@page import="models.Contact" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html:html>
@@ -34,7 +36,9 @@
 			<div class="item">
 	        	<a href="Connection.do" class="ui primary button"><bean:message key="link.signin"/></a>
 	    	</div>
-		<%} %>
+		<%}
+   			Contact contact = (Contact) request.getAttribute("contact");
+   		%>
    </div>
   </div>
 </div>
@@ -131,23 +135,26 @@
    				<p><html:errors property="groups"/></p>
 			</div>
 		</div>
-		<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
-		<div class="two fields">
-			<div class="field">
-				<label for="numSiret">Num Siret de l'entreprise</label>
-				<html:text name="contact" property="numSiret" size="14" maxlength="14"/>
-				<div class="ui error message">
-    				<p><html:errors property="numSiret"/></p>
-  				</div>
+		
+		<% if(Company.class.isInstance(contact)) { %>
+			<h4 class="ui dividing header"><bean:message key="form.contact.entreprise"/></h4>
+			<div class="two fields">
+				<div class="field">
+					<label for="numSiret">Num Siret de l'entreprise</label>
+					<html:text name="contact" property="numSiret" size="14" maxlength="14"/>
+					<div class="ui error message">
+	    				<p><html:errors property="numSiret"/></p>
+	  				</div>
+				</div>
+				<div class="field">
+					<label for="name">Nom de l'entreprise</label>
+					<html:text name="contact" property="name" size="50" maxlength="50"/>
+					<div class="ui error message">
+	    				<p><html:errors property="name"/></p>
+	  				</div>
+				</div>
 			</div>
-			<div class="field">
-				<label for="name">Nom de l'entreprise</label>
-				<html:text name="contact" property="name" size="50" maxlength="50"/>
-				<div class="ui error message">
-    				<p><html:errors property="name"/></p>
-  				</div>
-			</div>
-		</div>
+		<% } %>
 		<html:submit styleClass="ui button"><bean:message key="form.contact.edit"/></html:submit>
    </html:form> 
 </div>

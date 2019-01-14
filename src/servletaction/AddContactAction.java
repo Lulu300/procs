@@ -96,7 +96,7 @@ public class AddContactAction extends Action {
 		Contact contact = new Contact(lastName, firstName, email, adresse, phones, contactGroups);
 		
 		if (name != "" && numSiret != "") {
-			Company company = new Company(contact, numSiret, name);
+			Contact company = new Company(contact, numSiret, name);
 			contactService.save(company);
 		} else {
 			contactService.save(contact);

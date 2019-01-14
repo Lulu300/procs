@@ -32,15 +32,11 @@ public class ContactDAO extends DAO
 		return res;
 	}
 	
-	public Company getContact(int id) {
-		Company contact = null;
+	public Contact getContact(int id) {
+		Contact contact = null;
 		super.beginTransaction();
 		try {
-			contact = (Company) super.getSession().get(Company.class, id);
-			if (contact == null) {
-				Contact c = (Contact) super.getSession().get(Contact.class, id);
-				contact = new Company(c, null, null);
-			}
+			contact = (Contact) super.getSession().get(Contact.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

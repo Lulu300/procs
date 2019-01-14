@@ -36,7 +36,7 @@ public class InfoContactEditionForm extends Action {
 	        final ContactService contactService = (ContactService) context.getBean("contactService");
 	        final GroupService groupService = (GroupService) context.getBean("groupService");
 	        
-			Company contact = contactService.getContact(id);
+			Contact contact = contactService.getContact(id);
 			List<Group> listGroups = groupService.getAllGroups();
 			
 			System.out.println(contact);

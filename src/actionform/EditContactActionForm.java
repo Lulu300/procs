@@ -201,11 +201,14 @@ public class EditContactActionForm extends ActionForm {
 		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50) {
 			errors.add("country", new ActionMessage("form.contact.country.error.size"));
 		}
-		if (this.numSiret != "" && this.name != "" && this.numSiret.length() != 14) {
-			errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
-		}
-		if (this.name != "" && this.numSiret != "" && (this.name.length() < 1 || this.name.length() > 45)) {
-			errors.add("name", new ActionMessage("form.contact.companyName.error.size"));
+		
+		if (this.numSiret != null && this.numSiret != null) {
+			if (this.numSiret != "" && this.name != "" && this.numSiret.length() != 14) {
+				errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
+			}
+			if (this.name != "" && this.numSiret != "" && (this.name.length() < 1 || this.name.length() > 45)) {
+				errors.add("name", new ActionMessage("form.contact.companyName.error.size"));
+			}
 		}
 		
 		if(!errors.isEmpty()) {	

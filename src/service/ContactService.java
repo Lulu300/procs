@@ -27,7 +27,7 @@ public class ContactService {
 		return this.contactDAO.getAllContacts();
 	}
 	
-	public Company getContact(int id) {
+	public Contact getContact(int id) {
 		return this.contactDAO.getContact(id);
 	}
 	

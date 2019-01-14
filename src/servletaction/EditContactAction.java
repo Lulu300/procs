@@ -96,6 +96,14 @@ public class EditContactAction extends Action {
 		}
 		
 		Contact contact = contactService.getContact(id);
+		
+		System.out.println(name);
+		System.out.println(numSiret);
+		if (name != null && numSiret != null) {
+			((Company) contact).setName(name);
+			((Company) contact).setNumSiret(numSiret);
+		}
+		
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);
@@ -109,32 +117,13 @@ public class EditContactAction extends Action {
 		contact.setAdresse(adresse);
 		contact.setPhoneNumbers(phones);
 		contact.setGroups(contactGroups);
-
-		System.out.println(name);
-		System.out.println(name.length());
-		System.out.println(name != "");
 		
-		System.out.println(numSiret);
-		System.out.println(numSiret.length());
-		System.out.println(numSiret != "");
-		if (name != "" && numSiret != "") {
-			Company company = new Company(contact, numSiret, name);
-			try {
-				contactService.merge(company);
-				return pMapping.findForward("success");
-			} catch (Exception e) {
-				System.out.println(e);
-				return pMapping.findForward("error");
-			}
-		} else {
-			try {
-				System.out.println(contact);
-				contactService.merge(contact);
-				return pMapping.findForward("success");
-			} catch (Exception e) {
-				System.out.println(e);
-				return pMapping.findForward("error");
-			}
+		try {
+			contactService.merge(contact);
+			return pMapping.findForward("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return pMapping.findForward("error");
 		}
 	}
 }
