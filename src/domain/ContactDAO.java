@@ -3,8 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.stat.Statistics;
+
 import domain.DAO;
 import models.Contact;
+import util.HibernateUtil;
 
 
 public class ContactDAO extends DAO {

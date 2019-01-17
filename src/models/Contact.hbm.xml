@@ -5,6 +5,8 @@
 
 <hibernate-mapping package="models">
 	<class name="Contact" table="Contact" discriminator-value="contact">
+		<cache usage="read-write" region="Contact"/>
+		
 		<id name="id" type="int" column="id">
 			<generator class="increment"/>
 		</id>
