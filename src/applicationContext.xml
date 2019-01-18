@@ -31,6 +31,16 @@
 		<property name="groupDAO" ref="groupDAO" />
 	</bean>
 	
+	<aop:config>
+		<aop:aspect id="LoggerBean" ref="logger">
+			<aop:before
+				pointcut="execution(boolean domain.ContactDAO.removeContact(models.Contact)) and args(contact)"
+				method="log" arg-names="contact"
+			/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="logger" class="log.AOPLogger"/>
+	
 	<bean id="FamilyGroup" class="models.Group">
 		<constructor-arg type="String" value="Family" />
 	</bean>

@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.Order;
 import org.hibernate.stat.Statistics;
 
 import domain.DAO;
@@ -53,9 +54,9 @@ public class ContactDAO extends DAO {
 		
 		super.beginTransaction();
 		try {
-			List res = super.getSession().createQuery("select distinct contact from Contact contact left join fetch contact.phoneNumbers phone").list();
-			for (int i=0; i < res.size(); i++) {
-				Contact c = (Contact) res.get(i);
+			List cs = super.getSession().createCriteria(Contact.class).addOrder(Order.asc("lastName")).list();
+			for (int i=0; i < cs.size(); i++) {
+				Contact c = (Contact) cs.get(i);
 				contacts.add(c);
 			}
 		} catch (Exception e) {
