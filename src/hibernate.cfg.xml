@@ -10,13 +10,14 @@
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		
-		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property>
         <property name="hibernate.cache.use_second_level_cache">true</property>
         <property name="hibernate.generate_statistics">true</property>
         <property name="hibernate.cache.use_structred_entries">true</property>
         <property name="hibernate.cache.use_query_cache">true</property>
 		
-		<property name="current_session_context_class">thread</property>
+		<!-- Ne pas utiliser thread si on utilise Spring pour Hibernate -->
+		<!-- <property name="current_session_context_class">thread</property> -->
 		
 		<property name="hbm2ddl.auto">create</property>
 		<property name="hibernate.show_sql">true</property>

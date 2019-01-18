@@ -1,47 +1,30 @@
 package domain;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
-
-import util.HibernateUtil;
 
 public class DAO {
 
-    private Transaction tx;
     private Statistics stats;
+    protected SessionFactory sessionFactory;
 
-    DAO() {
+    DAO(SessionFactory sessionFactory) {
         super();
-        this.tx = null;
         this.stats = null;
+        this.sessionFactory = sessionFactory;
     }
 
-    Session getSession() {
-        return HibernateUtil.getSessionFactory().getCurrentSession();
+    public SessionFactory getSessionFactory() {
+        return this.sessionFactory;
     }
-
-    void beginTransaction() {
-        try {
-            this.tx = this.getSession().beginTransaction();
-            this.stats = HibernateUtil.getSessionFactory().getStatistics();
-            stats.setStatisticsEnabled(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    
+    public void setSessionFactory(SessionFactory sessionFactory) {
+    	this.sessionFactory = sessionFactory;
     }
-
-    void endTransaction() {
-        try {
-        	System.out.println("Second Level Hit Count=" + stats.getSecondLevelCacheHitCount());
-			System.out.println("Second Level Miss Count=" + stats.getSecondLevelCacheMissCount());
-            this.tx.commit();
-            System.out.println("Second Level Hit Count=" + stats.getSecondLevelCacheHitCount());
-			System.out.println("Second Level Miss Count=" + stats.getSecondLevelCacheMissCount());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        this.tx = null;
+    
+    protected void getStats() {
+    	this.stats = this.getSessionFactory().getStatistics();
+        stats.setStatisticsEnabled(true);
     }
 
 }

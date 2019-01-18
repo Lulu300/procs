@@ -10,17 +10,19 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
-
-	<!-- DAOs -->
-	<bean id="contactDAO" class="domain.ContactDAO"/>
-	<bean id="adresseDAO" class="domain.AdresseDAO"/>
-	<bean id="phoneDAO" class="domain.PhoneDAO"/>
-	<bean id="groupDAO" class="domain.GroupDAO"/>
 	
 	<!-- Services -->
-	<bean id="contactService" class="service.ContactService">
+	<!-- <bean id="contactService" class="service.ContactService">
 		<property name="contactDAO" ref="contactDAO"/>
+	</bean> -->
+	
+	<bean id="contactService" class="service.ContactService">
+		<constructor-arg>
+			<ref bean="contactDAO" />
+		</constructor-arg>
 	</bean>
+
+	
 	<bean id="adresseService" class="service.AdresseService">
 		<property name="adresseDAO" ref="adresseDAO"/>
 	</bean>
@@ -136,4 +138,60 @@
 		<property name="name" value="Bikini Bottom" />
 		<property name="numSiret" value="12345678901234" />
 	</bean>
+	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		destroy-method="getCatalog">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/miage" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- DAOs -->
+	<bean id="contactDAO" class="domain.ContactDAO">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	<bean id="adresseDAO" class="domain.AdresseDAO">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	<bean id="phoneDAO" class="domain.PhoneDAO">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	<bean id="groupDAO" class="domain.GroupDAO">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- important: lignes standards, pensez juste à pointer le bon repertoire de vos DAO dans l'exp.reg. -->
+ 	<aop:config>
+		<aop:advisor pointcut="execution(* domain.*.*(..))" advice-ref="txAdvice"/>
+	</aop:config> 
+	<!-- important: lignes standards-->
+	 <tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
 </beans>

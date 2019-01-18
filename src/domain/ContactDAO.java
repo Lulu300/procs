@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
 
 import domain.DAO;
@@ -12,20 +13,20 @@ import util.HibernateUtil;
 
 public class ContactDAO extends DAO {
 	
-    public ContactDAO() {
-        super();
+    public ContactDAO(SessionFactory sessionFactory) {
+        super(sessionFactory);
     }
 	
 	public Contact getContact(int id) {
 		Contact contact = null;
 		
-		super.beginTransaction();
+		// super.beginTransaction();
 		try {
-			contact = (Contact) super.getSession().get(Contact.class, id);
+			contact = (Contact) this.sessionFactory.getCurrentSession().get(Contact.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return contact;
@@ -34,26 +35,25 @@ public class ContactDAO extends DAO {
 	public boolean removeContact(Contact contact) {
 		boolean success;
 		
-		super.beginTransaction();
+		// super.beginTransaction();
 		try {
-			super.getSession().delete(contact);
+			this.sessionFactory.getCurrentSession().delete(contact);
 			success = true;
 		} catch (Exception e) {
 			success = false;
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return success;
 	}
 
 	public List<Contact> getAllContacts() {
-		List<Contact> contacts = new ArrayList<Contact>();
-		
-		super.beginTransaction();
+		List<Contact> contacts = new ArrayList<Contact>();	
+		// super.beginTransaction();
 		try {
-			List res = super.getSession().createQuery("select distinct contact from Contact contact left join fetch contact.phoneNumbers phone").list();
+			List res = this.sessionFactory.getCurrentSession().createQuery("select distinct contact from Contact contact left join fetch contact.phoneNumbers phone").list();
 			for (int i=0; i < res.size(); i++) {
 				Contact c = (Contact) res.get(i);
 				contacts.add(c);
@@ -61,7 +61,7 @@ public class ContactDAO extends DAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return contacts;
@@ -70,15 +70,15 @@ public class ContactDAO extends DAO {
 	public boolean merge(Contact contact) {
 		boolean success;
 		
-		super.beginTransaction();
+		// super.beginTransaction();
 		try {
-			super.getSession().merge(contact);
+			this.sessionFactory.getCurrentSession().merge(contact);
 			success = true;
 		} catch (Exception e) {
 			success = false;
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return success;
@@ -87,15 +87,15 @@ public class ContactDAO extends DAO {
 	public boolean save(Contact contact) {
 		boolean success;
 		
-		super.beginTransaction();
+		// super.beginTransaction();
 		try {
-			super.getSession().save(contact);
+			this.sessionFactory.getCurrentSession().save(contact);
 			success = true;
 		} catch (Exception e) {
 			success = false;
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return success;

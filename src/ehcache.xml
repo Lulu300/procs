@@ -11,5 +11,7 @@
         eternal="false"
         timeToIdleSeconds="300"
         timeToLiveSeconds="600"
-        overflowToDisk="false" />
+        overflowToDisk="false">
+        <persistence strategy="localTempSwap"/>
+    </cache>
 </ehcache> 

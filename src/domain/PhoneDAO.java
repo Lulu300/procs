@@ -1,27 +1,29 @@
 package domain;
 
+import org.hibernate.SessionFactory;
+
 import domain.DAO;
 import models.PhoneNumber;
 
 
 public class PhoneDAO extends DAO {
 	
-    public PhoneDAO() {
-        super();
+    public PhoneDAO(SessionFactory sessionFactory) {
+        super(sessionFactory);
     }
     
     public boolean save(PhoneNumber phoneNumber) {
     	boolean success;
     	
-    	super.beginTransaction();
+    	// super.beginTransaction();
 		try {
-			super.getSession().save(phoneNumber);
+			super.getSessionFactory().getCurrentSession().save(phoneNumber);
 			success = true;
 		} catch (Exception e) {
 			success = false;
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return success;
@@ -30,13 +32,13 @@ public class PhoneDAO extends DAO {
     public PhoneNumber getPhoneNumber(int id) {
     	PhoneNumber adresse = null;
     	
-		super.beginTransaction();
+    	// super.beginTransaction();
 		try {
-			adresse = (PhoneNumber) super.getSession().get(PhoneNumber.class, id);
+			adresse = (PhoneNumber) super.getSessionFactory().getCurrentSession().get(PhoneNumber.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return adresse;

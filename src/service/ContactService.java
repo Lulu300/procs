@@ -7,10 +7,19 @@ import models.Contact;
 
 public class ContactService {
 	
-	private ContactDAO contactDAO;
+	private ContactDAO contactDAO=null;
 	
 	public ContactService() {}
 	
+	
+	
+	public ContactService(ContactDAO contactDAO) {
+		
+		this.contactDAO = contactDAO;
+	}
+
+
+
 	public void setContactDAO(ContactDAO contactDAO) {
 		this.contactDAO = contactDAO;
 	}

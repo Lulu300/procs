@@ -1,26 +1,28 @@
 package domain;
 
+import org.hibernate.SessionFactory;
+
 import domain.DAO;
 import models.Adresse;
 
 public class AdresseDAO extends DAO {
 	
-    public AdresseDAO() {
-        super();
+    public AdresseDAO(SessionFactory sessionFactory) {
+        super(sessionFactory);
     }
     
     public boolean save(Adresse adresse) {
     	boolean success;
     	
-    	super.beginTransaction();
+    	// super.beginTransaction();
 		try {
-			super.getSession().save(adresse);
+			super.getSessionFactory().getCurrentSession().save(adresse);
 			success = true;
 		} catch (Exception e) {
 			success = false;
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return success;
@@ -29,13 +31,13 @@ public class AdresseDAO extends DAO {
     public Adresse getAdresse(int id) {
 		Adresse adresse = null;
 		
-		super.beginTransaction();
+		// super.beginTransaction();
 		try {
-			adresse = (Adresse) super.getSession().get(Adresse.class, id);
+			adresse = (Adresse) super.getSessionFactory().getCurrentSession().get(Adresse.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			super.endTransaction();
+			// super.endTransaction();
 		}
 		
 		return adresse;
