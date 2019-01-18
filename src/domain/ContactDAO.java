@@ -54,7 +54,7 @@ public class ContactDAO extends DAO {
 		List<Contact> contacts = new ArrayList<Contact>();	
 		// super.beginTransaction();
 		try {
-			List cs = super.getSession().createCriteria(Contact.class).addOrder(Order.asc("lastName")).list();
+			List cs = this.sessionFactory.getCurrentSession().createCriteria(Contact.class).addOrder(Order.asc("lastName")).list();
 			for (int i=0; i < cs.size(); i++) {
 				Contact c = (Contact) cs.get(i);
 				contacts.add(c);
