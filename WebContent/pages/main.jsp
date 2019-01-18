@@ -188,7 +188,8 @@ $(document).ready(function() {
 
     var table = $('#contactTable').DataTable({
         language : {
-            url: getLanguage()
+            url: getLanguage(),
+            "bSort": false
         }
     });
 } );
