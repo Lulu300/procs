@@ -23,8 +23,8 @@ public class DAO {
     }
     
     protected void getStats() {
-    	this.stats = this.getSessionFactory().getStatistics();
-        stats.setStatisticsEnabled(true);
+    	// this.stats = this.getSessionFactory().getStatistics();
+        // stats.setStatisticsEnabled(true);
     }
 
 }

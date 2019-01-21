@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 
 import models.Group;
 
@@ -14,18 +15,19 @@ public class GroupDAO extends DAO {
 	}
 	
 	public List<Group> getAllGroups() {
-		List<Group> contacts = new ArrayList<Group>();
+		List<Group> groups = new ArrayList<Group>();
 		
 		// super.beginTransaction();
 		try {
-			contacts = super.getSessionFactory().getCurrentSession().createQuery("from Group group").list();
+			Group g = new Group();
+			groups = super.getSessionFactory().getCurrentSession().createCriteria(Group.class).add(Example.create(g)).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			// super.endTransaction();
 		}
 		
-		return contacts;
+		return groups;
 	}
 	
 	public Group getGroup(int id) {

@@ -23,7 +23,9 @@ public class ContactDAO extends DAO {
 		
 		// super.beginTransaction();
 		try {
+			System.out.println("hello");
 			contact = (Contact) this.sessionFactory.getCurrentSession().get(Contact.class, id);
+			System.out.println("hello 2");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

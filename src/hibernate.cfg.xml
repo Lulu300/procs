@@ -19,7 +19,7 @@
 		<!-- Ne pas utiliser thread si on utilise Spring pour Hibernate -->
 		<!-- <property name="current_session_context_class">thread</property> -->
 		
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 		<property name="hibernate.show_sql">true</property>
 		
 		<mapping resource="models/Contact.hbm.xml" />
