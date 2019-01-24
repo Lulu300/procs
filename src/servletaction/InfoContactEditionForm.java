@@ -41,9 +41,6 @@ public class InfoContactEditionForm extends Action {
 			List<Group> listGroups = groupService.getAllGroups();
 			
 			Set<PhoneNumber> phones = contact.getPhoneNumbers();
-			for (PhoneNumber p: phones) {
-				System.out.println(p);
-			}
 			if (phones.size() == 2) {
 				phones.add(new PhoneNumber("", ""));
 			} else if (phones.size() == 1) {
