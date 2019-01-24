@@ -11,14 +11,10 @@ public class ContactService {
 	
 	public ContactService() {}
 	
-	
-	
 	public ContactService(ContactDAO contactDAO) {
 		
 		this.contactDAO = contactDAO;
 	}
-
-
 
 	public void setContactDAO(ContactDAO contactDAO) {
 		this.contactDAO = contactDAO;

@@ -58,7 +58,7 @@
 	    </div>
 	    <div class="right floated column">
 		    <a style="margin-bottom: 2%;" class="ui labeled icon button" href="Populate.do">
-			  Hello darkness my old friend, i came to populate you again
+			  Populate
 			  <i class="plus icon"></i>
 			</a>
 	    </div>
@@ -137,6 +137,13 @@
 						</div>
 						<div class="eight wide column">
 							<p><span style="font-weight: bold;"><bean:message key="form.contact.phoneNumber.label"/></span>: <bean:write name="phoneNumber" property="phoneNumber"/></p>
+						</div>
+					</logic:iterate>
+					
+					<bean:define id="groups" name="contact" property="groups"/>
+					<logic:iterate name="groups" id="group">
+						<div class="eight wide column">
+							<p><span style="font-weight: bold;"><bean:message key="form.contact.group"/></span>: <bean:write name="group" property="name"/></p>
 						</div>
 					</logic:iterate>
 					<% if (Company.class.isInstance(contact)) { %>

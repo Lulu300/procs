@@ -14,34 +14,26 @@ public class PhoneDAO extends DAO {
     
     public boolean save(PhoneNumber phoneNumber) {
     	boolean success;
-    	
-    	// super.beginTransaction();
 		try {
 			super.getSessionFactory().getCurrentSession().save(phoneNumber);
 			success = true;
 		} catch (Exception e) {
 			success = false;
 			e.printStackTrace();
-		} finally {
-			// super.endTransaction();
 		}
 		
 		return success;
 	}
     
     public PhoneNumber getPhoneNumber(int id) {
-    	PhoneNumber adresse = null;
-    	
-    	// super.beginTransaction();
+    	PhoneNumber phone = null;
 		try {
-			adresse = (PhoneNumber) super.getSessionFactory().getCurrentSession().get(PhoneNumber.class, id);
+			phone = (PhoneNumber) super.getSessionFactory().getCurrentSession().get(PhoneNumber.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			// super.endTransaction();
 		}
 		
-		return adresse;
+		return phone;
 	}
     
 }

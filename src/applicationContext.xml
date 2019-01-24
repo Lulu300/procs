@@ -11,11 +11,6 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 	
-	<!-- Services -->
-	<!-- <bean id="contactService" class="service.ContactService">
-		<property name="contactDAO" ref="contactDAO"/>
-	</bean> -->
-	
 	<bean id="contactService" class="service.ContactService">
 		<constructor-arg>
 			<ref bean="contactDAO" />

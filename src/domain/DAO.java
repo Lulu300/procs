@@ -5,12 +5,12 @@ import org.hibernate.stat.Statistics;
 
 public class DAO {
 
-    private Statistics stats;
+    // private Statistics stats;
     protected SessionFactory sessionFactory;
 
     DAO(SessionFactory sessionFactory) {
         super();
-        this.stats = null;
+        // this.stats = null;
         this.sessionFactory = sessionFactory;
     }
 

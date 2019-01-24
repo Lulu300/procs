@@ -62,6 +62,8 @@ public class EditContactAction extends Action {
 		final String[] groups = lForm.getGroups();
 		
 		Set<PhoneNumber> phones = new HashSet<>();
+		System.out.println("----");
+		System.out.println(phoneNumber);
 		if (phoneKind.length == phoneNumber.length && phoneKind.length == idPhone.length) {
 			for (int i=0; i<phoneKind.length; i++) {
 				if (phoneKind[i] != "" && phoneNumber[i] != "") {

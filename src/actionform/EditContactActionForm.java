@@ -192,31 +192,27 @@ public class EditContactActionForm extends ActionForm {
 		if ((this.country != "" && this.country.length() < 3) || this.country.length() > 50) {
 			errors.add("country", new ActionMessage("form.contact.country.error.size"));
 		}
-		/* Company */
-		if (this.numSiret != null && this.numSiret != null) {
-			if (this.numSiret != "" && this.name != "" || this.numSiret.length() != 14) {
-				errors.add("numSiret", new ActionMessage("form.contact.numSiret.error.size"));
-			}
-			if (this.name != "" && this.numSiret != "" || (this.name.length() < 1 || this.name.length() > 45)) {
-				errors.add("name", new ActionMessage("form.contact.companyName.error.size"));
-			}
-		}
 		
 		if(!errors.isEmpty()) {	
 			Set<PhoneNumber> phoneNumbers = new HashSet<PhoneNumber>();
-			for (int i=0; i<this.phoneKind.length; i++) {
-				phoneNumbers.add(new PhoneNumber(this.phoneKind[i], this.phoneNumber[i]));
+			if (this.phoneKind != null && this.phoneNumber != null) {
+				for (int i=0; i<this.phoneKind.length; i++) {
+					phoneNumbers.add(new PhoneNumber(this.phoneKind[i], this.phoneNumber[i]));
+				}
 			}
 			
 			Set<Group> contactGroups = new HashSet<Group>();
-			for (String idGroup : this.groups) {
-				contactGroups.add(groupService.getGroup(Integer.parseInt(idGroup)));
+			if(this.groups != null) {
+				for (int j=0; j<this.groups.length; j++) {
+					contactGroups.add(groupService.getGroup(Integer.parseInt(this.groups[j])));
+				}
 			}
 			
 			Adresse adresse = new Adresse(this.street, this.city, this.zip, this.country);
 			Contact contact = new Contact(Integer.parseInt(this.id), this.lastName, this.firstName, this.email, adresse, phoneNumbers, contactGroups);
 			
 			request.setAttribute("listGroups", this.listGroups);
+			request.setAttribute("phoneNumbers", phoneNumbers);
 			if (this.name != null && this.numSiret != null) {
 				Company company = new Company(contact, numSiret, name);
 				request.setAttribute("contact", company);
